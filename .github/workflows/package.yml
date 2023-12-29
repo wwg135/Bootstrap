@@ -31,4 +31,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: Bootstrap.ipa
-          path: ./packages/Bootstrap.ipa
+          path: ./packages/Bootstrap.tipa
