@@ -7,6 +7,7 @@
 #include "credits.h"
 #import <sys/sysctl.h>
 #include <sys/utsname.h>
+#import "Bootstrap-Swift.h"
 
 #include <Security/SecKey.h>
 #include <Security/Security.h>
@@ -38,11 +39,11 @@ OSStatus SecCodeCopySigningInformation(SecStaticCodeRef code, SecCSFlags flags, 
     SecStaticCodeRef codeRef = NULL;
     OSStatus result = SecStaticCodeCreateWithPathAndAttributes(binaryURL, kSecCSDefaultFlags, NULL, &codeRef);
     if(result != errSecSuccess) return NO;
-        
+    
     CFDictionaryRef signingInfo = NULL;
-     result = SecCodeCopySigningInformation(codeRef, kSecCSSigningInformation, &signingInfo);
+    result = SecCodeCopySigningInformation(codeRef, kSecCSSigningInformation, &signingInfo);
     if(result != errSecSuccess) return NO;
-        
+    
     NSString* teamID = (NSString*)CFDictionaryGetValue(signingInfo, CFSTR("teamid"));
     SYSLOG("teamID in trollstore: %@", teamID);
     
@@ -52,6 +53,23 @@ OSStatus SecCodeCopySigningInformation(SecStaticCodeRef code, SecCSFlags flags, 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+
+    UIViewController *vc = [BootstrapViewWrapper createBootstrapView];
+    
+    UIView *bootstrapView = vc.view;
+    bootstrapView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    [self addChildViewController:vc];
+    [self.view addSubview:bootstrapView];
+    
+    [NSLayoutConstraint activateConstraints:@[
+        [bootstrapView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor],
+        [bootstrapView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor],
+        [bootstrapView.topAnchor constraintEqualToAnchor:self.view.topAnchor],
+        [bootstrapView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor],
+    ]];
+    
+    [vc didMoveToParentViewController:self];
     
     self.logView.text = nil;
     self.logView.layer.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.01].CGColor;
@@ -78,7 +96,7 @@ OSStatus SecCodeCopySigningInformation(SecStaticCodeRef code, SecCSFlags flags, 
         
         self.bootstraBtn.enabled = YES;
         [self.bootstraBtn setTitle:Localized(@"Bootstrap") forState:UIControlStateNormal];
-
+        
         self.respringBtn.enabled = NO;
         self.appEnablerBtn.enabled = NO;
         self.rebuildappsBtn.enabled = NO;
@@ -89,12 +107,12 @@ OSStatus SecCodeCopySigningInformation(SecStaticCodeRef code, SecCSFlags flags, 
         BOOL WaitForFix=NO;
         if(NSProcessInfo.processInfo.operatingSystemVersion.majorVersion==17)
         {
-           cpu_subtype_t cpuFamily = 0;
-           size_t cpuFamilySize = sizeof(cpuFamily);
-           sysctlbyname("hw.cpufamily", &cpuFamily, &cpuFamilySize, NULL, 0);
-           if (cpuFamily==CPUFAMILY_ARM_BLIZZARD_AVALANCHE || cpuFamily==CPUFAMILY_ARM_EVEREST_SAWTOOTH) {
-               WaitForFix=YES;
-           }
+            cpu_subtype_t cpuFamily = 0;
+            size_t cpuFamilySize = sizeof(cpuFamily);
+            sysctlbyname("hw.cpufamily", &cpuFamily, &cpuFamilySize, NULL, 0);
+            if (cpuFamily==CPUFAMILY_ARM_BLIZZARD_AVALANCHE || cpuFamily==CPUFAMILY_ARM_EVEREST_SAWTOOTH) {
+                WaitForFix=YES;
+            }
         }
         
         if(WaitForFix) {
@@ -105,7 +123,7 @@ OSStatus SecCodeCopySigningInformation(SecStaticCodeRef code, SecCSFlags flags, 
             self.bootstraBtn.enabled = YES;
             [self.bootstraBtn setTitle:Localized(@"Install") forState:UIControlStateNormal];
         }
-
+        
         self.respringBtn.enabled = NO;
         self.appEnablerBtn.enabled = NO;
         self.rebuildappsBtn.enabled = NO;
@@ -113,7 +131,7 @@ OSStatus SecCodeCopySigningInformation(SecStaticCodeRef code, SecCSFlags flags, 
     } else {
         self.bootstraBtn.enabled = NO;
         [self.bootstraBtn setTitle:Localized(@"Unsupported") forState:UIControlStateDisabled];
-
+        
         self.respringBtn.enabled = NO;
         self.appEnablerBtn.enabled = NO;
         self.rebuildappsBtn.enabled = NO;
@@ -122,7 +140,7 @@ OSStatus SecCodeCopySigningInformation(SecStaticCodeRef code, SecCSFlags flags, 
         [AppDelegate showMesage:Localized(@"the current ios version is not supported yet, we may add support in a future version.") title:Localized(@"Unsupported")];
     }
     
-
+    
     [AppDelegate addLogText:[NSString stringWithFormat:@"ios-version: %@",UIDevice.currentDevice.systemVersion]];
     
     struct utsname systemInfo;
@@ -271,7 +289,7 @@ OSStatus SecCodeCopySigningInformation(SecStaticCodeRef code, SecCSFlags flags, 
     
     UIImpactFeedbackGenerator* generator = [[UIImpactFeedbackGenerator alloc] initWithStyle:UIImpactFeedbackStyleSoft];
     generator.impactOccurred;
-
+    
     if(find_jbroot()) //make sure jbroot() function available
     {
         if([NSFileManager.defaultManager fileExistsAtPath:jbroot(@"/.installed_dopamine")]) {
@@ -311,11 +329,11 @@ OSStatus SecCodeCopySigningInformation(SecStaticCodeRef code, SecCSFlags flags, 
         
         NSString* log=nil;
         NSString* err=nil;
-            
+        
         if([NSUserDefaults.appDefaults boolForKey:@"openssh"] && [NSFileManager.defaultManager fileExistsAtPath:jbroot(@"/usr/libexec/sshd-keygen-wrapper")]) {
             NSString* log=nil;
             NSString* err=nil;
-             status = spawnRoot(jbroot(@"/basebin/bootstrapd"), @[@"openssh",@"start"], &log, &err);
+            status = spawnRoot(jbroot(@"/basebin/bootstrapd"), @[@"openssh",@"start"], &log, &err);
             if(status==0)
                 [AppDelegate addLogText:@"openssh launch successful"];
             else
@@ -324,14 +342,14 @@ OSStatus SecCodeCopySigningInformation(SecStaticCodeRef code, SecCSFlags flags, 
         
         [AppDelegate addLogText:@"respring now..."]; sleep(1);
         
-         status = spawnBootstrap((char*[]){"/usr/bin/sbreload", NULL}, &log, &err);
+        status = spawnBootstrap((char*[]){"/usr/bin/sbreload", NULL}, &log, &err);
         if(status!=0) [AppDelegate showMesage:[NSString stringWithFormat:@"%@\n\nstderr:\n%@",log,err] title:[NSString stringWithFormat:@"code(%d)",status]];
         
     });
 }
 
 - (IBAction)unbootstrap:(id)sender {
-
+    
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:Localized(@"Warnning") message:Localized(@"Are you sure to uninstall bootstrap?\n\nPlease make sure you have disabled tweak for all apps before uninstalling.") preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:Localized(@"Cancel") style:UIAlertActionStyleDefault handler:nil]];
     [alert addAction:[UIAlertAction actionWithTitle:Localized(@"Uninstall") style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action){
@@ -342,7 +360,7 @@ OSStatus SecCodeCopySigningInformation(SecStaticCodeRef code, SecCSFlags flags, 
             NSString* log=nil;
             NSString* err=nil;
             int status = spawnRoot(NSBundle.mainBundle.executablePath, @[@"unbootstrap"], &log, &err);
-                
+            
             [AppDelegate dismissHud];
             
             if(status == 0) {
