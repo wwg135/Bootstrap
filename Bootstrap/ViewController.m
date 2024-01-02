@@ -131,7 +131,7 @@ OSStatus SecCodeCopySigningInformation(SecStaticCodeRef code, SecCSFlags flags, 
     } else {
         self.bootstraBtn.enabled = NO;
         [self.bootstraBtn setTitle:Localized(@"不支持") forState:UIControlStateDisabled];
-        
+
         self.respringBtn.enabled = NO;
         self.appEnablerBtn.enabled = NO;
         self.rebuildappsBtn.enabled = NO;
@@ -139,8 +139,8 @@ OSStatus SecCodeCopySigningInformation(SecStaticCodeRef code, SecCSFlags flags, 
         
         [AppDelegate showMesage:Localized(@"the current ios version is not supported yet, we may add support in a future version.") title:Localized(@"Unsupported")];
     }
-    
-    
+
+
     [AppDelegate addLogText:[NSString stringWithFormat:@"ios版本: %@",UIDevice.currentDevice.systemVersion]];
     
     struct utsname systemInfo;
@@ -349,7 +349,7 @@ OSStatus SecCodeCopySigningInformation(SecStaticCodeRef code, SecCSFlags flags, 
 }
 
 - (IBAction)unbootstrap:(id)sender {
-    
+
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:Localized(@"提示") message:Localized(@"你确定卸载引导程序吗?\n\n在卸载之前,请确保您已经禁用了所有应用程序已注入的插件。") preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:Localized(@"取消") style:UIAlertActionStyleDefault handler:nil]];
     [alert addAction:[UIAlertAction actionWithTitle:Localized(@"卸载") style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action){
