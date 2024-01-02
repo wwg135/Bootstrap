@@ -137,10 +137,10 @@ OSStatus SecCodeCopySigningInformation(SecStaticCodeRef code, SecCSFlags flags, 
         self.rebuildappsBtn.enabled = NO;
         self.uninstallBtn.hidden = YES;
         
-        [AppDelegate showMesage:Localized(@"the current ios version is not supported yet, we may add support in a future version.") title:Localized(@"Unsupported")];
+        [AppDelegate showMesage:Localized(@"目前的ios版本还不支持，我们可能会在未来的版本中添加支持。") title:Localized(@"不支持")];
     }
-
     
+
     [AppDelegate addLogText:[NSString stringWithFormat:@"ios版本: %@",UIDevice.currentDevice.systemVersion]];
     
     struct utsname systemInfo;
