@@ -95,7 +95,7 @@ OSStatus SecCodeCopySigningInformation(SecStaticCodeRef code, SecCSFlags flags, 
     {
         
         self.bootstraBtn.enabled = YES;
-        [self.bootstraBtn setTitle:Localized(@"Bootstrap") forState:UIControlStateNormal];
+        [self.bootstraBtn setTitle:Localized(@"安装") forState:UIControlStateNormal];
         
         self.respringBtn.enabled = NO;
         self.appEnablerBtn.enabled = NO;
@@ -130,7 +130,7 @@ OSStatus SecCodeCopySigningInformation(SecStaticCodeRef code, SecCSFlags flags, 
         self.uninstallBtn.hidden = YES;
     } else {
         self.bootstraBtn.enabled = NO;
-        [self.bootstraBtn setTitle:Localized(@"Unsupported") forState:UIControlStateDisabled];
+        [self.bootstraBtn setTitle:Localized(@"不支持") forState:UIControlStateDisabled];
         
         self.respringBtn.enabled = NO;
         self.appEnablerBtn.enabled = NO;
@@ -141,7 +141,7 @@ OSStatus SecCodeCopySigningInformation(SecStaticCodeRef code, SecCSFlags flags, 
     }
     
     
-    [AppDelegate addLogText:[NSString stringWithFormat:@"ios-version: %@",UIDevice.currentDevice.systemVersion]];
+    [AppDelegate addLogText:[NSString stringWithFormat:@"ios版本: %@",UIDevice.currentDevice.systemVersion]];
     
     struct utsname systemInfo;
     uname(&systemInfo);
@@ -350,9 +350,9 @@ OSStatus SecCodeCopySigningInformation(SecStaticCodeRef code, SecCSFlags flags, 
 
 - (IBAction)unbootstrap:(id)sender {
     
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:Localized(@"Warnning") message:Localized(@"Are you sure to uninstall bootstrap?\n\nPlease make sure you have disabled tweak for all apps before uninstalling.") preferredStyle:UIAlertControllerStyleAlert];
-    [alert addAction:[UIAlertAction actionWithTitle:Localized(@"Cancel") style:UIAlertActionStyleDefault handler:nil]];
-    [alert addAction:[UIAlertAction actionWithTitle:Localized(@"Uninstall") style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action){
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:Localized(@"提示") message:Localized(@"你确定卸载引导程序吗?\n\n在卸载之前,请确保您已经禁用了所有应用程序已注入的插件。") preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:Localized(@"取消") style:UIAlertActionStyleDefault handler:nil]];
+    [alert addAction:[UIAlertAction actionWithTitle:Localized(@"卸载") style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action){
         
         dispatch_async(dispatch_get_global_queue(0, 0), ^{
             [AppDelegate showHudMsg:Localized(@"Uninstalling")];
