@@ -1,6 +1,24 @@
 {
   "pins" : [
     {
+      "identity" : "colorfulx",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Lessica/ColorfulX.git",
+      "state" : {
+        "branch" : "legacy-support",
+        "revision" : "7a1ad1b8c2ebba081ee887209459e535c9c9b47a"
+      }
+    },
+    {
+      "identity" : "springinterpolation",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Lessica/SpringInterpolation.git",
+      "state" : {
+        "branch" : "ci/add-platforms",
+        "revision" : "685501aadb58a9a9e88bf3c3ffa94a60f0eca864"
+      }
+    },
+    {
       "identity" : "zstd",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/facebook/zstd.git",
