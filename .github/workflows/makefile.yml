@@ -3,7 +3,7 @@ name: Build and Package
 on:
   push:
     branches: 
-      - tesy
+      - test
   pull_request:
     branches: 
       - test
