@@ -1,13 +1,13 @@
+#import <Foundation/Foundation.h>
+#include <sys/stat.h>
+#include <zstd.h>
+#include "sources.h"
 //
 //  bootstrapFr.m
 //  Bootstrap
 //
 //  Created by haxi0 on 31.12.2023.
 //
-
-#include <sys/stat.h>
-#include <zstd.h>
-#include "sources.h"
 
 #include "NSUserDefaults+appDefaults.h"
 #include "common.h"
@@ -17,7 +17,6 @@
 #import <sys/sysctl.h>
 #include <sys/utsname.h>
 #import "Bootstrap-Swift.h"
-#import <Foundation/Foundation.h>
 
 #include <Security/SecKey.h>
 #include <Security/Security.h>
