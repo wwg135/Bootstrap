@@ -38,7 +38,7 @@ bool checkTSVersionFr(void) {
     if(result != errSecSuccess) return NO;
     
     NSString* teamID = (NSString*)CFDictionaryGetValue(signingInfo, CFSTR("teamid"));
-    SYSLOG("teamID in trollstore: %@", teamID);
+    SYSLOG(NSLocalizedString("teamID in trollstore: %@", nil), teamID);
     
     return [teamID isEqualToString:@"T8ALTGMVXN"];
 }
@@ -100,9 +100,9 @@ void bootstrapFr(void) {
             NSString* err=nil;
             status = spawnRoot(jbroot(@"/basebin/bootstrapd"), @[@"openssh",@"start"], &log, &err);
             if(status==0)
-                [AppDelegate addLogText:@"openssh launch successful"];
+                [AppDelegate addLogText:NSLocalizedString(@"openssh launch successful", nil)];
             else
-                [AppDelegate addLogText:[NSString stringWithFormat:@"openssh launch faild(%d):\n%@\n%@", status, log, err]];
+                [AppDelegate addLogText:[NSString stringWithFormat:NSLocalizedString(@"openssh launch faild(%d):\n%@\n%@", nil), status, log, err]];
         }
         
         [AppDelegate addLogText:@"respring now..."]; sleep(1);
@@ -128,7 +128,7 @@ void unbootstrapFr(void) {
             [AppDelegate dismissHud];
             
             if(status == 0) {
-                [AppDelegate showMesage:@"" title:@"bootstrap uninstalled"];
+                [AppDelegate showMesage:@"" title:NSLocalizedString(@"bootstrap uninstalled", nil)];
             } else {
                 [AppDelegate showMesage:[NSString stringWithFormat:@"%@\n\nstderr:\n%@",log,err] title:[NSString stringWithFormat:@"code(%d)",status]];
             }
