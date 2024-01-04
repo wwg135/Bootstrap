@@ -115,11 +115,11 @@ void bootstrapFr(void) {
 
 void unbootstrapFr(void) {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Warnning", nil) message:NSLocalizedString(@"Are you sure to uninstall bootstrap?\n\nPlease make sure you have disabled tweak for all apps before uninstalling.", nil) preferredStyle:UIAlertControllerStyleAlert];
-    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel") style:UIAlertActionStyleDefault handler:nil]];
-    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Uninstall") style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action){
+    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleDefault handler:nil]];
+    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Uninstall", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action){
         
         dispatch_async(dispatch_get_global_queue(0, 0), ^{
-            [AppDelegate showHudMsg:NSLocalizedString(@"Uninstalling")];
+            [AppDelegate showHudMsg:NSLocalizedString(@"Uninstalling", nil)];
             
             NSString* log=nil;
             NSString* err=nil;
@@ -149,7 +149,7 @@ void rebuildappsFr(void) {
     STRAPLOG("Status: Rebuilding Apps");
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        [AppDelegate showHudMsg:NSLocalizedString(@"Applying")];
+        [AppDelegate showHudMsg:NSLocalizedString(@"Applying", nil)];
         
         NSString* log=nil;
         NSString* err=nil;
