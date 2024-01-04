@@ -146,7 +146,7 @@ void respringFr(void) {
 }
 
 void rebuildappsFr(void) {
-    STRAPLOG("Status: Rebuilding Apps");
+    STRAPLOG("状态：正在重建应用程序");
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         [AppDelegate showHudMsg:NSLocalizedString(@"Applying", nil)];
