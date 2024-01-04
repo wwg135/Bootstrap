@@ -19,7 +19,7 @@ struct OptionsView: View {
             
             VStack {
                 HStack {
-                    Text(NSLocalizedString("Settings", comment: ""))
+                    Text("Settings")
                         .bold()
                         .frame(maxWidth: 250, alignment: .leading)
                         .font(Font.system(size: 35))
@@ -39,7 +39,7 @@ struct OptionsView: View {
                 ScrollView {
                     VStack {
                         VStack {
-                            Text(NSLocalizedString("Options", comment: ""))
+                            Text("Options")
                                 .foregroundColor(Color(UIColor.label))
                                 .bold()
                                 .font(Font.system(size: 20))
@@ -49,7 +49,7 @@ struct OptionsView: View {
                             
                             Toggle(isOn: $openSSH, label: {
                                 Label(
-                                    title: { Text(NSLocalizedString("OpenSSH", comment: "")) },
+                                    title: { Text("OpenSSH") },
                                     icon: { Image(systemName: "terminal") }
                                 )
                             })
@@ -63,7 +63,7 @@ struct OptionsView: View {
                         }
                         
                         VStack {
-                            Text(NSLocalizedString("Tweaks", comment: ""))
+                            Text("Tweaks")
                                 .foregroundColor(Color(UIColor.label))
                                 .bold()
                                 .font(Font.system(size: 20))
@@ -76,7 +76,7 @@ struct OptionsView: View {
                                     showAppView.toggle()
                                 } label: {
                                     Label(
-                                        title: { Text(NSLocalizedString("AppEnabler", comment: "")) },
+                                        title: { Text("AppEnabler") },
                                         icon: { Image(systemName: "app") }
                                     )
                                 }
@@ -86,7 +86,7 @@ struct OptionsView: View {
                                     rebuildappsFr()
                                 } label: {
                                     Label(
-                                        title: { Text(NSLocalizedString("Rebuild Apps", comment: "")) },
+                                        title: { Text("Rebuild Apps") },
                                         icon: { Image(systemName: "arrow.clockwise") }
                                     )
                                 }

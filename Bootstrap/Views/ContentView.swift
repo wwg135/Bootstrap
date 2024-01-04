@@ -50,13 +50,13 @@ struct BootstrapView: View {
                     } label: {
                         if isBootstrapInstalled() {
                             Label(
-                                title: { Text(NSLocalizedString("Kickstart", comment: "")) },
+                                title: { Text("Kickstart") },
                                 icon: { Image(systemName: "terminal") }
                             )
                             .padding(25)
                         } else {
                             Label(
-                                title: { Text(NSLocalizedString("Bootstrap", comment: "")) },
+                                title: { Text("Bootstrap") },
                                 icon: { Image(systemName: "terminal") }
                             )
                             .padding(25)
@@ -74,7 +74,7 @@ struct BootstrapView: View {
                             unbootstrapFr()
                         } label: {
                             Label(
-                                title: { Text(NSLocalizedString("Uninstall", comment: "")) },
+                                title: { Text("Uninstall") },
                                 icon: { Image(systemName: "trash") }
                             )
                             .padding(25)
@@ -94,7 +94,7 @@ struct BootstrapView: View {
                             }
                         } label: {
                             Label(
-                                title: { Text(NSLocalizedString("Settings", comment: "")) },
+                                title: { Text("Settings") },
                                 icon: { Image(systemName: "gear") }
                             )
                             .padding(25)
@@ -109,7 +109,7 @@ struct BootstrapView: View {
                             respringFr()
                         } label: {
                             Label(
-                                title: { Text(NSLocalizedString("Respring", comment: "")) },
+                                title: { Text("Respring") },
                                 icon: { Image(systemName: "arrow.clockwise") }
                             )
                             .padding(25)
@@ -151,7 +151,7 @@ struct BootstrapView: View {
                             .opacity(0.5)
                     }
                     
-                    Text(NSLocalizedString("UI made with love by haxi0. ♡", comment: ""))
+                    Text("UI made with love by haxi0. ♡")
                         .font(Font.system(size: 13))
                         .opacity(0.5)
                 }
@@ -163,7 +163,7 @@ struct BootstrapView: View {
                 }
             } label: {
                 Label(
-                    title: { Text(NSLocalizedString("Credits", comment: "")) },
+                    title: { Text("Credits") },
                     icon: { Image(systemName: "person") }
                 )
             }

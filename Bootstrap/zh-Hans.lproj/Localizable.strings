@@ -1,105 +1,55 @@
-"Bootstrapped" = "已安装";
-
-"Bootstrap" = "安装";
-
-"Install" = "安装";
-
-"Unsupported" = "不支持";
-
-"The current iOS version is not supported yet, we may add support in a future version." = "当前 iOS 版本尚不支持，我们可能会在未来版本中添加支持。";
-
-"ios-version: %@" = "ios版本: %@";
-
-"device-model: %s" = "\n设备型号: %s";
-
-"app-version: %@/%@" = "\n应用版本: %@/%@";
-
-"boot-session: %@" = "\n启动会话: %@";
-
-"bootstrap installed" = "\n引导已安装";
-
-"bootstrap not installed" = "\n引导未安装";
-
-"system bootstrapped" = "\n系统已引导";
-
-"system not bootstrapped" = "\n系统未引导\n";
-
-"\n:::Credits:::\n" = "\n:::感谢:::\n";
-
-"\nThanks to these guys, we couldn't have completed this project without their help!" = "\n感谢以上所有朋友，没有他们的帮助，我们就不可能完成这个项目！";
-
-"Server Not Running" = "服务未运行";
-
-"For unknown reasons the bootstrap server is not running, the only thing we can do is to restart it now." = "由于未知的原因，引导程序没有运行，我们现在唯一能做的就是重新启动它。";
-
-"Restart Server" = "重启引导程序";
-
-"bootstrap server restart successful" = "引导程序重启成功";
-
-"Error" = "错误";
-
-"bootstrap server check successful" = "\n引导程序检查成功";
-
-"Status: Rebuilding Apps" = "状态：正在重建应用程序";
-
-"Applying" = "正在应用...";
-
-"OpenSSH package is not installed." = "未安装 OpenSSH 插件包";
-
-"Developer" = "开发者";
-
-"Your TrollStore version is out of date. Bootstrap only supports TrollStore 2." = "你的trollstore版本太旧，Bootstrap只支持trollstore>=2.0版本";
-
-"Your device does not seem to have developer mode enabled.\n\nPlease enable developer mode in Settings > Privacy & Security and reboot your device." = "您的设备似乎未启用开发者模式.\n\n请在设置->[隐私与安全]中启用开发者模式,然后重启您的设备.";
-
-"RootHide Dopamine has been installed on this device, now install this bootstrap may break it!" = "RootHide Dopamine 已经安装在这个设备上，现在安装这个 Bootstrap 程序可能会破坏它！";
-
-"You've installed an old beta version, please disable all app tweaks and reboot the device to uninstall it so that you can install the latest version." = "已经安装了旧的测试版，请禁用所有应用程序插件并重新启动设备以卸载它，以便安装新版本的 Bootstrap 程序。";
-
-"Bootstrapping" = "正在引导...";
-
-"openssh launch successful" = "openssh 启用成功";
-
-"openssh launch faild(%d):\n%@\n%@" = "openssh 启用失败(%d):\n%@\n%@";
-
-"respring now..." = "正在注销...";
-
-"Warnning" = "提示";
-
-"Are you sure to uninstall bootstrap?\n\nPlease make sure you have disabled tweaks for all apps before uninstalling." = "你确定要卸载 Bootstrap 程序吗？\n\n卸载之前，请确保已禁用所有应用程序的插件。";
-
-"Cancel" = "取消";
-
-"Uninstall" = "卸载";
-
-"Uninstalling" = "正在卸载...";
-
-"Bootstrap Uninstalled" = "引导程序未安装";
-
-"Bootstrap Uninstalled" = "Bootstrap 已卸载";
-
-"Kickstart" = "已安装";
-
-"Settings" = "设置";
-
-"Respring" = "注销";
-
-"UI made with love by haxi0. ♡" = "UI 制作：haxi0. ♡";
-
-"Credits" = "感谢";
-
-"Options" = "选项";
-
-"OpenSSH" = "启用 SSH";
-
-"Tweaks" = "注入插件";
-
-"AppEnabler" = "选择应用程序";
-
-"Rebuild Apps" = "重建应用程序";
-
-"Tweak Enabler" = "插件注入";
-
-"Name or identifier" = "输入App名字或标识符";
-
-"OK" = "好的";
+{
+    "\n:::Credits:::\n" = "\n:::\U611f\U8c22:::\n";
+    "\nThanks to these guys, we couldn't have completed this project without their help!" = "\n\U611f\U8c22\U4ee5\U4e0a\U6240\U6709\U670b\U53cb\Uff0c\U6ca1\U6709\U4ed6\U4eec\U7684\U5e2e\U52a9\Uff0c\U6211\U4eec\U5c31\U4e0d\U53ef\U80fd\U5b8c\U6210\U8fd9\U4e2a\U9879\U76ee\Uff01";
+    AppEnabler = "\U9009\U62e9\U5e94\U7528\U7a0b\U5e8f";
+    Applying = "\U6b63\U5728\U5e94\U7528...";
+    "Are you sure to uninstall bootstrap?\n\nPlease make sure you have disabled tweaks for all apps before uninstalling." = "\U4f60\U786e\U5b9a\U8981\U5378\U8f7d Bootstrap \U7a0b\U5e8f\U5417\Uff1f\n\n\U5378\U8f7d\U4e4b\U524d\Uff0c\U8bf7\U786e\U4fdd\U5df2\U7981\U7528\U6240\U6709\U5e94\U7528\U7a0b\U5e8f\U7684\U63d2\U4ef6\U3002";
+    Bootstrap = "\U5b89\U88c5";
+    "Bootstrap Uninstalled" = "Bootstrap \U5df2\U5378\U8f7d";
+    Bootstrapped = "\U5df2\U5b89\U88c5";
+    Bootstrapping = "\U6b63\U5728\U5f15\U5bfc...";
+    Cancel = "\U53d6\U6d88";
+    Credits = "\U611f\U8c22";
+    Developer = "\U5f00\U53d1\U8005";
+    Error = "\U9519\U8bef";
+    "Error Getting Log!" = "\U83b7\U53d6\U65e5\U5fd7\U9519\U8bef";
+    "For unknown reasons the bootstrap server is not running, the only thing we can do is to restart it now." = "\U7531\U4e8e\U672a\U77e5\U7684\U539f\U56e0\Uff0c\U5f15\U5bfc\U7a0b\U5e8f\U6ca1\U6709\U8fd0\U884c\Uff0c\U6211\U4eec\U73b0\U5728\U552f\U4e00\U80fd\U505a\U7684\U5c31\U662f\U91cd\U65b0\U542f\U52a8\U5b83\U3002";
+    Install = "\U5b89\U88c5";
+    Kickstart = "\U5df2\U5b89\U88c5";
+    "Name or identifier" = "\U8f93\U5165App\U540d\U5b57\U6216\U6807\U8bc6\U7b26";
+    OK = "\U597d\U7684";
+    OpenSSH = "\U542f\U7528 SSH";
+    "OpenSSH package is not installed." = "\U672a\U5b89\U88c5 OpenSSH \U63d2\U4ef6\U5305";
+    Options = "\U9009\U9879";
+    "Rebuild Apps" = "\U91cd\U5efa\U5e94\U7528\U7a0b\U5e8f";
+    Respring = "\U6ce8\U9500";
+    "Restart Server" = "\U91cd\U542f\U5f15\U5bfc\U7a0b\U5e8f";
+    "RootHide Dopamine has been installed on this device, now install this bootstrap may break it!" = "RootHide Dopamine \U5df2\U7ecf\U5b89\U88c5\U5728\U8fd9\U4e2a\U8bbe\U5907\U4e0a\Uff0c\U73b0\U5728\U5b89\U88c5\U8fd9\U4e2a Bootstrap \U7a0b\U5e8f\U53ef\U80fd\U4f1a\U7834\U574f\U5b83\Uff01";
+    "Server Not Running" = "\U670d\U52a1\U672a\U8fd0\U884c";
+    Settings = "\U8bbe\U7f6e";
+    "Status: Rebuilding Apps" = "\U72b6\U6001\Uff1a\U6b63\U5728\U91cd\U5efa\U5e94\U7528\U7a0b\U5e8f";
+    "The current iOS version is not supported yet, we may add support in a future version." = "\U5f53\U524d iOS \U7248\U672c\U5c1a\U4e0d\U652f\U6301\Uff0c\U6211\U4eec\U53ef\U80fd\U4f1a\U5728\U672a\U6765\U7248\U672c\U4e2d\U6dfb\U52a0\U652f\U6301\U3002";
+    "Tweak Enabler" = "\U63d2\U4ef6\U6ce8\U5165";
+    Tweaks = "\U6ce8\U5165\U63d2\U4ef6";
+    "UI made with love by haxi0. \U2661" = "UI \U5236\U4f5c\Uff1ahaxi0. \U2661";
+    Uninstall = "\U5378\U8f7d";
+    Uninstalling = "\U6b63\U5728\U5378\U8f7d...";
+    Unsupported = "\U4e0d\U652f\U6301";
+    Warnning = "\U63d0\U793a";
+    "You've installed an old beta version, please disable all app tweaks and reboot the device to uninstall it so that you can install the latest version." = "\U5df2\U7ecf\U5b89\U88c5\U4e86\U65e7\U7684\U6d4b\U8bd5\U7248\Uff0c\U8bf7\U7981\U7528\U6240\U6709\U5e94\U7528\U7a0b\U5e8f\U63d2\U4ef6\U5e76\U91cd\U65b0\U542f\U52a8\U8bbe\U5907\U4ee5\U5378\U8f7d\U5b83\Uff0c\U4ee5\U4fbf\U5b89\U88c5\U65b0\U7248\U672c\U7684 Bootstrap \U7a0b\U5e8f\U3002";
+    "Your TrollStore version is out of date. Bootstrap only supports TrollStore 2." = "\U4f60\U7684trollstore\U7248\U672c\U592a\U65e7\Uff0cBootstrap\U53ea\U652f\U6301trollstore>=2.0\U7248\U672c";
+    "Your device does not seem to have developer mode enabled.\n\nPlease enable developer mode in Settings > Privacy & Security and reboot your device." = "\U60a8\U7684\U8bbe\U5907\U4f3c\U4e4e\U672a\U542f\U7528\U5f00\U53d1\U8005\U6a21\U5f0f.\n\n\U8bf7\U5728\U8bbe\U7f6e->[\U9690\U79c1\U4e0e\U5b89\U5168]\U4e2d\U542f\U7528\U5f00\U53d1\U8005\U6a21\U5f0f,\U7136\U540e\U91cd\U542f\U60a8\U7684\U8bbe\U5907.";
+    "app-version: %@/%@" = "\n\U5e94\U7528\U7248\U672c: %@/%@";
+    "boot-session: %@" = "\n\U542f\U52a8\U4f1a\U8bdd: %@";
+    "bootstrap installed" = "\n\U5f15\U5bfc\U5df2\U5b89\U88c5";
+    "bootstrap not installed" = "\n\U5f15\U5bfc\U672a\U5b89\U88c5";
+    "bootstrap server check successful" = "\n\U5f15\U5bfc\U7a0b\U5e8f\U68c0\U67e5\U6210\U529f";
+    "bootstrap server restart successful" = "\U5f15\U5bfc\U7a0b\U5e8f\U91cd\U542f\U6210\U529f";
+    "device-model: %s" = "\n\U8bbe\U5907\U578b\U53f7: %s";
+    "ios-version: %@" = "ios\U7248\U672c: %@";
+    "openssh launch faild(%d):\n%@\n%@" = "openssh \U542f\U7528\U5931\U8d25(%d):\n%@\n%@";
+    "openssh launch successful" = "openssh \U542f\U7528\U6210\U529f";
+    "respring now..." = "\U6b63\U5728\U6ce8\U9500...";
+    "system bootstrapped" = "\n\U7cfb\U7edf\U5df2\U5f15\U5bfc";
+    "system not bootstrapped" = "\n\U7cfb\U7edf\U672a\U5f15\U5bfc\n";
+}
