@@ -5,6 +5,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import <Foundation/Foundation.h>
+
 void rebuildSignature(NSString *directoryPath);
 
 int bootstrap();
