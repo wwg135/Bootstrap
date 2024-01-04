@@ -12,6 +12,7 @@ struct CreditsView: View {
     
     let credits: [String: String] = [
         "opa334": "http://github.com/opa334",
+        "wwg135": "http://github.com/wwg135",
         "hayden": "https://procursus.social/@hayden",
         "CKatri": "https://procursus.social/@cameron",
         "Alfie": "https://alfiecg.uk",
@@ -102,18 +103,8 @@ struct CreditsView: View {
                 
                 ScrollView {
                     VStack {
-                        Text("Credits")
-                            .foregroundColor(Color(UIColor.label))
-                            .bold()
-                            .font(Font.system(size: 20))
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                        
-                        Divider()
-                        
-                        VStack {
-                            ForEach(credits.sorted(by: { $0.key < $1.key }), id: \.key) { (name, link) in
-                                creditStack(name: name, link: link)
-                            }
+                        ForEach(credits.sorted(by: { $0.key < $1.key }), id: \.key) { (name, link) in
+                            creditStack(name: name, link: link)
                         }
                     }
                     .frame(width: 253)
