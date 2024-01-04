@@ -17,6 +17,7 @@ struct BootstrapView: View {
     @State var openSSH = false
     @State var showOptions = false
     @State var showCredits = false
+    @State var updateAvailable = false
     let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
     let versionRegex = try? NSRegularExpression(pattern: "\\d+\\.\\d+\\.\\d+")
     
