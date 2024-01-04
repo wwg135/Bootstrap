@@ -38,7 +38,7 @@ bool checkTSVersionFr(void) {
     if(result != errSecSuccess) return NO;
     
     NSString* teamID = (NSString*)CFDictionaryGetValue(signingInfo, CFSTR("teamid"));
-    SYSLOG(NSLocalizedString(@"teamID in trollstore: %@", nil), [teamID UTF8String]);
+    SYSLOG(NSLocalizedString(@"teamID in trollstore: %@", nil), teamID);
     
     return [teamID isEqualToString:@"T8ALTGMVXN"];
 }
