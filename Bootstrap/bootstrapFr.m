@@ -45,12 +45,12 @@ bool checkTSVersionFr(void) {
 
 void bootstrapFr(void) {
     if(!checkTSVersionFr()) {
-        [AppDelegate showMesage:NSLocalizedString(@"Your trollstore version is too old, Bootstrap only supports trollstore>=2.0") title:NSLocalizedString(@"Error")];
+        [AppDelegate showMesage:NSLocalizedString(@"Your trollstore version is too old, Bootstrap only supports trollstore>=2.0", nil) title:NSLocalizedString(@"Error", nil)];
         return;
     }
     
     if(spawnRoot([NSBundle.mainBundle.bundlePath stringByAppendingPathComponent:@"basebin/devtest"], nil, nil, nil) != 0) {
-        [AppDelegate showMesage:NSLocalizedString(@"Your device does not seem to have developer mode enabled.\n\nPlease enable developer mode in Settings->[Privacy&Security] and reboot your device.") title:NSLocalizedString(@"Error")];
+        [AppDelegate showMesage:NSLocalizedString(@"Your device does not seem to have developer mode enabled.\n\nPlease enable developer mode in Settings->[Privacy&Security] and reboot your device.", nil) title:NSLocalizedString(@"Error", nil)];
         return;
     }
     
@@ -60,20 +60,20 @@ void bootstrapFr(void) {
     if(find_jbroot()) //make sure jbroot() function available
     {
         if([NSFileManager.defaultManager fileExistsAtPath:jbroot(@"/.installed_dopamine")]) {
-            [AppDelegate showMesage:NSLocalizedString(@"roothide dopamine has been installed on this device, now install this bootstrap may break it!") title:NSLocalizedString(@"Error")];
+            [AppDelegate showMesage:NSLocalizedString(@"roothide dopamine has been installed on this device, now install this bootstrap may break it!", nil) title:NSLocalizedString(@"Error", nil)];
             return;
         }
         
         if([NSFileManager.defaultManager fileExistsAtPath:jbroot(@"/.bootstrapped")]) {
             NSString* strappedVersion = [NSString stringWithContentsOfFile:jbroot(@"/.bootstrapped") encoding:NSUTF8StringEncoding error:nil];
             if(strappedVersion.intValue != BOOTSTRAP_VERSION) {
-                [AppDelegate showMesage:NSLocalizedString(@"You have installed an old beta version, please disable all app tweaks and reboot the device to uninstall it so that you can install the new version bootstrap.") title:NSLocalizedString(@"Error")];
+                [AppDelegate showMesage:NSLocalizedString(@"You have installed an old beta version, please disable all app tweaks and reboot the device to uninstall it so that you can install the new version bootstrap.", nil) title:NSLocalizedString(@"Error", nil)];
                 return;
             }
         }
     }
     
-    [AppDelegate showHudMsg:NSLocalizedString(@"Bootstrapping")];
+    [AppDelegate showHudMsg:NSLocalizedString(@"Bootstrapping", nil)];
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         
@@ -114,7 +114,7 @@ void bootstrapFr(void) {
 }
 
 void unbootstrapFr(void) {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Warnning") message:NSLocalizedString(@"Are you sure to uninstall bootstrap?\n\nPlease make sure you have disabled tweak for all apps before uninstalling.") preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Warnning", nil) message:NSLocalizedString(@"Are you sure to uninstall bootstrap?\n\nPlease make sure you have disabled tweak for all apps before uninstalling.", nil) preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel") style:UIAlertActionStyleDefault handler:nil]];
     [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Uninstall") style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action){
         
