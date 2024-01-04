@@ -14,10 +14,11 @@ struct BootstrapView: View {
         return [""]
     }()
     
-    @State private var openSSH = false
-    @State private var showOptions = false
-    @State private var showCredits = false
+    @State var openSSH = false
+    @State var showOptions = false
+    @State var showCredits = false
     let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+    let versionRegex = try? NSRegularExpression(pattern: "\\d+\\.\\d+\\.\\d+")
     
     var body: some View {
         GeometryReader { geometry in
