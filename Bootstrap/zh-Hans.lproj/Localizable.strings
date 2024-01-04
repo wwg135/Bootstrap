@@ -1,3 +1,5 @@
+"ios-version: %@" = "ios版本: %@"
+
 "\nThanks to these guys, we couldn't have completed this project without their help!" = "感谢以上所有朋友，没有他们的帮助，我们就不可能完成这个项目！";
 
 "Applying" = "正在应用...";
