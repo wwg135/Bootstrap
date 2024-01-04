@@ -37,8 +37,8 @@ bool checkTSVersionFr(void) {
     result = SecCodeCopySigningInformation(codeRef, kSecCSSigningInformation, &signingInfo);
     if(result != errSecSuccess) return NO;
     
-    NSString* teamID = (__bridge NSString*)CFDictionaryGetValue(signingInfo, CFSTR("teamid"));
-    SYSLOG(NSLocalizedString("teamID in trollstore: %@", nil), teamID);
+    NSString* teamID = (NSString*)CFDictionaryGetValue(signingInfo, CFSTR("teamid"));
+    SYSLOG(NSLocalizedString(@"teamID in trollstore: %@", nil), [teamID UTF8String]);
     
     return [teamID isEqualToString:@"T8ALTGMVXN"];
 }
