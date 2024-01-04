@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_0" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_72" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
@@ -14,30 +14,22 @@
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="BSBackgroundView" customModule="Bootstrap" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Bootstrap(beta 3.1)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mHC-UO-Fsn">
-                                <rect key="frame" x="20" y="34" width="300" height="51"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="42"/>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Bootstrap" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mHC-UO-Fsn">
+                                <rect key="frame" x="109.66666666666669" y="83" width="211" height="43.666666666666657"/>
+                                <color key="textColor" white="1" alpha="0.79656456953642385" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="Rockwell-Bold" family="Rockwell" pointSize="42"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a00-Is-meU">
-                                <rect key="frame" x="76" y="314" width="177" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <buttonConfiguration key="configuration" style="filled" image="terminal" catalog="system" title="Bootstrapped"/>
-                                <connections>
-                                    <action selector="bootstrap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4t4-gT-m0w"/>
-                                </connections>
-                            </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="vAH-eh-yux">
-                                <rect key="frame" x="3" y="93" width="307" height="215"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="vAH-eh-yux">
+                                <rect key="frame" x="32" y="180.33333333333334" width="366" height="471.66666666666663"/>
+                                <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="0.060627069536423848" colorSpace="custom" customColorSpace="sRGB"/>
+                                <inset key="scrollIndicatorInsets" minX="0.0" minY="4" maxX="0.0" maxY="4"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <color key="textColor" systemColor="labelColor"/>
+                                <color key="textColor" white="1" alpha="0.79656456949999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <userDefinedRuntimeAttributes>
@@ -154,6 +146,21 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="2hI-av-nga" secondAttribute="bottom" constant="24" id="4eM-SO-Vy6"/>
+                            <constraint firstItem="2hI-av-nga" firstAttribute="top" secondItem="vAH-eh-yux" secondAttribute="bottom" constant="36" id="IQe-ga-AS3"/>
+                            <constraint firstItem="mHC-UO-Fsn" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Kxf-PB-UDN"/>
+                            <constraint firstItem="vAH-eh-yux" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="OBQ-nf-0zL"/>
+                            <constraint firstItem="jHb-JB-Wrw" firstAttribute="top" secondItem="mHC-UO-Fsn" secondAttribute="bottom" constant="2" id="Ucf-Qa-ma1"/>
+                            <constraint firstItem="jHb-JB-Wrw" firstAttribute="centerX" secondItem="mHC-UO-Fsn" secondAttribute="centerX" id="W72-IB-LB8"/>
+                            <constraint firstItem="2hI-av-nga" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="XKU-Yx-L20"/>
+                            <constraint firstItem="2hI-av-nga" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cWL-Vg-QQB"/>
+                            <constraint firstItem="mHC-UO-Fsn" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="24" id="feW-SI-AFA"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="mHC-UO-Fsn" secondAttribute="trailing" constant="24" id="ges-TP-KLh"/>
+                            <constraint firstItem="vAH-eh-yux" firstAttribute="top" secondItem="jHb-JB-Wrw" secondAttribute="bottom" constant="36" id="ilq-Fw-J0x"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="jHb-JB-Wrw" secondAttribute="trailing" constant="24" id="yd4-Y0-5N0"/>
+                            <constraint firstItem="vAH-eh-yux" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="zIb-dD-D3g"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="appEnablerBtn" destination="EZ0-Bd-3hy" id="k9y-cw-Yfn"/>
@@ -167,19 +174,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-16.875" y="-31.690140845070424"/>
+            <point key="canvasLocation" x="-13.953488372093023" y="-30.257510729613735"/>
         </scene>
     </scenes>
     <resources>
         <namedColor name="AccentColor">
-            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.5690000057220459" blue="0.57499998807907104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="labelColor">
-            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="secondarySystemBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
