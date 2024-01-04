@@ -209,7 +209,7 @@ struct BootstrapView: View {
         }
 
         if releasesJSON.first(where: {
-            if let version = $0["name"] as? String, versionRegex.firstMatch(in: version, options: [], range: NSRange(location: 0, length: version.utf16.count)) != nil {   
+            if let version = $0["name"] as? String, versionRegex?.firstMatch(in: version, options: [], range: NSRange(location: 0, length: version.utf16.count)) != nil {   
                 if let latestName = $0["tag_name"] as? String, let latestVersion = $0["name"] as? String {
                     if latestName.count == 10 && currentAppVersion.count == 10 {
                         if latestName > currentAppVersion && checkForUpdates && versionRegex.firstMatch(in: latestVersion, options: [], range: NSRange(location: 0, length: latestVersion.utf16.count)) != nil {
