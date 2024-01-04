@@ -5,6 +5,10 @@
 //  Created by haxi0 on 31.12.2023.
 //
 
+#include <sys/stat.h>
+#include <zstd.h>
+#include "sources.h"
+
 #include "NSUserDefaults+appDefaults.h"
 #include "common.h"
 #include "AppDelegate.h"
