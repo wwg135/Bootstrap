@@ -3,10 +3,10 @@ name: Build and Package
 on:
   push:
     branches: 
-      - 3.1
+      - tesy
   pull_request:
     branches: 
-      - 3.1
+      - test
   workflow_dispatch:
 
 concurrency:
@@ -52,7 +52,7 @@ jobs:
       - name: Pre body
         run: |
           echo -e "更新时间：${{ env.logT }}" >> release.txt
-          echo -e "> - 重构汉化中文，现在增加了汉化包，你可以解压ipa自己修改语言啦！" >> release.txt
+          echo -e "> - 测试版本，谨慎下载" >> release.txt
           sed -i '' "s/AAA/版本：${{ env.VERSION }}/g" ./Bootstrap/Views/ContentView.swift
       
       - name: Build Bootstrap
