@@ -189,7 +189,7 @@ struct BootstrapView: View {
                 do {
                     try await checkForUpdates()
                 } catch {
-                    Logger.log(error, type: .error, isStatus: false)
+                    print("Error: ", error)
                 }
             }
         }
