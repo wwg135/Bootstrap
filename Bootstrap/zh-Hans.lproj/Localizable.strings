@@ -22,7 +22,7 @@
 
 "system bootstrapped" = "\n系统已引导";
 
-"system not bootstrapped" = "\n系统未引导";
+"system not bootstrapped" = "\n系统未引导\n";
 
 "\n:::Credits:::\n" = "\n:::感谢:::\n";
 
