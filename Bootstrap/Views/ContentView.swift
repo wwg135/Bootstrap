@@ -184,7 +184,7 @@ struct BootstrapView: View {
     
     private func FetchLog() {
         guard let AttributedText = LogStream.shared.outputString.copy() as? NSAttributedString else {
-            LogItems = ["Error Getting Log!"]
+            LogItems = [String(NSLocalizedString("Error Getting Log!", comment: ""))]
             return
         }
         LogItems = AttributedText.string.split(separator: "\n")
