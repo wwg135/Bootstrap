@@ -37,7 +37,7 @@ struct BootstrapView: View {
                         Text("Bootstrap")
                             .bold()
                             .font(Font.system(size: 35))
-                        Text(NSLocalizedString("Version \(appVersion!)", comment: ""))
+                        Text(NSLocalizedString("AAA", comment: ""))
                             .font(Font.system(size: 20))
                             .opacity(0.5)
                     })
