@@ -48,7 +48,7 @@ struct BootstrapView: View {
                     Button {
                         bootstrapFr()
                     } label: {
-                        if isBootstrapInstalled() && isSystemBootstrapped() {
+                        if isBootstrapInstalled() {
                             Label(
                                 title: { Text(NSLocalizedString("Kickstart", comment: "")) },
                                 icon: { Image(systemName: "terminal") }
@@ -186,7 +186,7 @@ struct BootstrapView: View {
     
     private func FetchLog() {
         guard let AttributedText = LogStream.shared.outputString.copy() as? NSAttributedString else {
-            LogItems = ["Error Getting Log!"]
+            LogItems = [NSLocalizedString("Error Getting Log!", comment: "")]
             return
         }
         LogItems = AttributedText.string.split(separator: "\n")
