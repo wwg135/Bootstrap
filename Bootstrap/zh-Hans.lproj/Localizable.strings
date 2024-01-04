@@ -1,6 +1,6 @@
 "\nThanks to these guys, we couldn't have completed this project without their help!" = "感谢以上所有朋友，没有他们的帮助，我们就不可能完成这个项目！";
 
-"Applying" = "应用";
+"Applying" = "正在应用...";
 
 "Are you sure to uninstall bootstrap?\n\nPlease make sure you have disabled tweaks for all apps before uninstalling." = "你确定要卸载 Bootstrap 程序吗？\n\n卸载之前，请确保已禁用所有应用程序的插件。";
 
@@ -8,9 +8,9 @@
 
 "Bootstrap Uninstalled" = "Bootstrap 已卸载";
 
-"Bootstrapped" = "已引导";
+"Bootstrapped" = "已安装";
 
-"Bootstrapping" = "引导中";
+"Bootstrapping" = "正在安装...";
 
 "Cancel" = "取消";
 
@@ -26,7 +26,7 @@
 
 "OK" = "好的";
 
-"OpenSSH package is not installed." = "未安装 OpenSSH 软件包。";
+"OpenSSH package is not installed." = "未安装 OpenSSH 插件包。";
 
 "Restart Server" = "重启服务";
 
@@ -40,14 +40,18 @@
 
 "Uninstall" = "卸载";
 
-"Uninstalling" = "卸载中";
+"Uninstalling" = "正在卸载...";
 
 "Unsupported" = "不支持";
 
-"Warnning" = "警告";
+"Warnning" = "提示";
 
 "You've installed an old beta version, please disable all app tweaks and reboot the device to uninstall it so that you can install the latest version." = "已经安装了旧的测试版，请禁用所有应用程序插件并重新启动设备以卸载它，以便安装新版本的 Bootstrap 程序。";
 
 "Your device does not seem to have developer mode enabled.\n\nPlease enable developer mode in Settings > Privacy & Security and reboot your device." = "设备似乎没有启用开发者模式。\n\n请在“设置”->“隐私与安全”中启用开发者模式并重新启动设备。";
 
 "Your TrollStore version is out of date. Bootstrap only supports TrollStore 2." = "你的 Trollstore 版本太旧，Bootstrap 仅支持 Trollstore 2。";
+
+"Settings" = "设置";
+
+"Respring" = "注销";
