@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FluidGradient
+import Foundation
 
 struct BootstrapView: View {
     @State var LogItems: [String.SubSequence] = {
