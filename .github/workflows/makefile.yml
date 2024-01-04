@@ -52,7 +52,7 @@ jobs:
       - name: Pre body
         run: |
           echo -e "更新时间：${{ env.logT }}" >> release.txt
-          echo -e "> - 优化UI显示，增加本地解压ipa可自己手动汉化." >> release.txt
+          echo -e "> - 官方UI测试." >> release.txt
           sed -i '' "s/AAA/版本：${{ env.VERSION }}/g" ./Bootstrap/Views/ContentView.swift
       
       - name: Build Bootstrap
