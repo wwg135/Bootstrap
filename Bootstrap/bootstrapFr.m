@@ -13,6 +13,7 @@
 #import <sys/sysctl.h>
 #include <sys/utsname.h>
 #import "Bootstrap-Swift.h"
+#import <Foundation/Foundation.h>
 
 #include <Security/SecKey.h>
 #include <Security/Security.h>
