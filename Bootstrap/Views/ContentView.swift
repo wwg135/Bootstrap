@@ -37,7 +37,7 @@ struct BootstrapView: View {
                         Text("Bootstrap")
                             .bold()
                             .font(Font.system(size: 35))
-                        Text("Version \(appVersion!)")
+                        Text(NSLocalizedString("Version \(appVersion!)", comment: ""))
                             .font(Font.system(size: 20))
                             .opacity(0.5)
                     })
@@ -48,15 +48,15 @@ struct BootstrapView: View {
                     Button {
                         bootstrapFr()
                     } label: {
-                        if isBootstrapInstalled() {
+                        if isBootstrapInstalled() && isSystemBootstrapped() {
                             Label(
-                                title: { Text("Kickstart").bold() },
+                                title: { Text(NSLocalizedString("Kickstart", comment: "")) },
                                 icon: { Image(systemName: "terminal") }
                             )
                             .padding(25)
                         } else {
                             Label(
-                                title: { Text("Bootstrap").bold() },
+                                title: { Text(NSLocalizedString("Bootstrap", comment: "")) },
                                 icon: { Image(systemName: "terminal") }
                             )
                             .padding(25)
@@ -75,7 +75,7 @@ struct BootstrapView: View {
                             unbootstrapFr()
                         } label: {
                             Label(
-                                title: { Text("Uninstall").bold() },
+                                title: { Text(NSLocalizedString("Uninstall", comment: "")) },
                                 icon: { Image(systemName: "trash") }
                             )
                             .padding(25)
@@ -96,7 +96,7 @@ struct BootstrapView: View {
                             }
                         } label: {
                             Label(
-                                title: { Text("Settings") },
+                                title: { Text(NSLocalizedString("Settings", comment: "")) },
                                 icon: { Image(systemName: "gear") }
                             )
                             .padding(25)
@@ -106,13 +106,12 @@ struct BootstrapView: View {
                                 .cornerRadius(20)
                                 .opacity(0.5)
                         }
-                        .disabled(!isSystemBootstrapped())
                         
                         Button {
                             respringFr()
                         } label: {
                             Label(
-                                title: { Text("Respring") },
+                                title: { Text(NSLocalizedString("Respring", comment: "")) },
                                 icon: { Image(systemName: "arrow.clockwise") }
                             )
                             .padding(25)
@@ -154,7 +153,7 @@ struct BootstrapView: View {
                             .opacity(0.5)
                     }
                     
-                    Text("UI made with love by haxi0. ♡")
+                    Text(NSLocalizedString("UI made with love by haxi0. ♡", comment: ""))
                         .font(Font.system(size: 13))
                         .opacity(0.5)
                 }
@@ -166,7 +165,7 @@ struct BootstrapView: View {
                 }
             } label: {
                 Label(
-                    title: { Text("Credits") },
+                    title: { Text(NSLocalizedString("Credits", comment: "")) },
                     icon: { Image(systemName: "person") }
                 )
             }
