@@ -41,12 +41,12 @@ bool checkTSVersionFr(void) {
 
 void bootstrapFr(void) {
     if(!checkTSVersionFr()) {
-        [AppDelegate showMesage:Localized(@"Your trollstore version is too old, Bootstrap only supports trollstore>=2.0") title:Localized(@"Error")];
+        [AppDelegate showMesage:NSLocalizedString(@"Your trollstore version is too old, Bootstrap only supports trollstore>=2.0") title:NSLocalizedString(@"Error")];
         return;
     }
     
     if(spawnRoot([NSBundle.mainBundle.bundlePath stringByAppendingPathComponent:@"basebin/devtest"], nil, nil, nil) != 0) {
-        [AppDelegate showMesage:Localized(@"Your device does not seem to have developer mode enabled.\n\nPlease enable developer mode in Settings->[Privacy&Security] and reboot your device.") title:Localized(@"Error")];
+        [AppDelegate showMesage:NSLocalizedString(@"Your device does not seem to have developer mode enabled.\n\nPlease enable developer mode in Settings->[Privacy&Security] and reboot your device.") title:NSLocalizedString(@"Error")];
         return;
     }
     
@@ -56,20 +56,20 @@ void bootstrapFr(void) {
     if(find_jbroot()) //make sure jbroot() function available
     {
         if([NSFileManager.defaultManager fileExistsAtPath:jbroot(@"/.installed_dopamine")]) {
-            [AppDelegate showMesage:Localized(@"roothide dopamine has been installed on this device, now install this bootstrap may break it!") title:Localized(@"Error")];
+            [AppDelegate showMesage:NSLocalizedString(@"roothide dopamine has been installed on this device, now install this bootstrap may break it!") title:NSLocalizedString(@"Error")];
             return;
         }
         
         if([NSFileManager.defaultManager fileExistsAtPath:jbroot(@"/.bootstrapped")]) {
             NSString* strappedVersion = [NSString stringWithContentsOfFile:jbroot(@"/.bootstrapped") encoding:NSUTF8StringEncoding error:nil];
             if(strappedVersion.intValue != BOOTSTRAP_VERSION) {
-                [AppDelegate showMesage:Localized(@"You have installed an old beta version, please disable all app tweaks and reboot the device to uninstall it so that you can install the new version bootstrap.") title:Localized(@"Error")];
+                [AppDelegate showMesage:NSLocalizedString(@"You have installed an old beta version, please disable all app tweaks and reboot the device to uninstall it so that you can install the new version bootstrap.") title:NSLocalizedString(@"Error")];
                 return;
             }
         }
     }
     
-    [AppDelegate showHudMsg:Localized(@"Bootstrapping")];
+    [AppDelegate showHudMsg:NSLocalizedString(@"Bootstrapping")];
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         
@@ -110,12 +110,12 @@ void bootstrapFr(void) {
 }
 
 void unbootstrapFr(void) {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:Localized(@"Warnning") message:Localized(@"Are you sure to uninstall bootstrap?\n\nPlease make sure you have disabled tweak for all apps before uninstalling.") preferredStyle:UIAlertControllerStyleAlert];
-    [alert addAction:[UIAlertAction actionWithTitle:Localized(@"Cancel") style:UIAlertActionStyleDefault handler:nil]];
-    [alert addAction:[UIAlertAction actionWithTitle:Localized(@"Uninstall") style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action){
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Warnning") message:NSLocalizedString(@"Are you sure to uninstall bootstrap?\n\nPlease make sure you have disabled tweak for all apps before uninstalling.") preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel") style:UIAlertActionStyleDefault handler:nil]];
+    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Uninstall") style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action){
         
         dispatch_async(dispatch_get_global_queue(0, 0), ^{
-            [AppDelegate showHudMsg:Localized(@"Uninstalling")];
+            [AppDelegate showHudMsg:NSLocalizedString(@"Uninstalling")];
             
             NSString* log=nil;
             NSString* err=nil;
@@ -145,7 +145,7 @@ void rebuildappsFr(void) {
     STRAPLOG("Status: Rebuilding Apps");
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        [AppDelegate showHudMsg:Localized(@"Applying")];
+        [AppDelegate showHudMsg:NSLocalizedString(@"Applying")];
         
         NSString* log=nil;
         NSString* err=nil;
