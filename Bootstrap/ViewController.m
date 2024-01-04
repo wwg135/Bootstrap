@@ -152,7 +152,7 @@ OSStatus SecCodeCopySigningInformation(SecStaticCodeRef code, SecCSFlags flags, 
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         usleep(1000*500);
-        [AppDelegate addLogText:@"\n:::Credits:::\n"];
+        [AppDelegate addLogText:NSLocalizedString(@"\n:::Credits:::\n", @"")];
         usleep(1000*500);
         for(NSString* name in CREDITS) {
             usleep(1000*50);
@@ -179,7 +179,7 @@ OSStatus SecCodeCopySigningInformation(SecStaticCodeRef code, SecCSFlags flags, 
                 NSString* log=nil;
                 NSString* err=nil;
                 if(spawnRoot(jbroot(@"/basebin/bootstrapd"), @[@"daemon",@"-f"], &log, &err)==0) {
-                    [AppDelegate addLogText:@"bootstrap server restart successful"];
+                    [AppDelegate addLogText:NSLocalizedString(@"bootstrap server restart successful", nil)];
                     [self updateOpensshStatus];
                 } else {
                     [AppDelegate showMesage:[NSString stringWithFormat:@"%@\nERR:%@", log, err] title:NSLocalizedString(@"Error", nil)];
@@ -189,7 +189,7 @@ OSStatus SecCodeCopySigningInformation(SecStaticCodeRef code, SecCSFlags flags, 
             
             [AppDelegate showAlert:alert];
         } else {
-            [AppDelegate addLogText:@"bootstrap server check successful"];
+            [AppDelegate addLogText:NSLocalizedString(@"bootstrap server check successful", nil)];
             [self updateOpensshStatus];
         }
     }
@@ -214,7 +214,7 @@ OSStatus SecCodeCopySigningInformation(SecStaticCodeRef code, SecCSFlags flags, 
 }
 
 - (IBAction)rebuildapps:(id)sender {
-    STRAPLOG("Status: Rebuilding Apps");
+    STRAPLOG(NSLocalizedString(@"Status: Rebuilding Apps", nil));
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         [AppDelegate showHudMsg:NSLocalizedString(@"Applying", nil)];
@@ -332,12 +332,12 @@ OSStatus SecCodeCopySigningInformation(SecStaticCodeRef code, SecCSFlags flags, 
             NSString* err=nil;
             status = spawnRoot(jbroot(@"/basebin/bootstrapd"), @[@"openssh",@"start"], &log, &err);
             if(status==0)
-                [AppDelegate addLogText:@"openssh launch successful"];
+                [AppDelegate addLogText:NSLocalizedString(@"openssh launch successful", nil)];
             else
                 [AppDelegate addLogText:[NSString stringWithFormat:@"openssh launch faild(%d):\n%@\n%@", status, log, err]];
         }
         
-        [AppDelegate addLogText:@"respring now..."]; sleep(1);
+        [AppDelegate addLogText:NSLocalizedString(@"respring now...", nil)]; sleep(1);
         
          status = spawnBootstrap((char*[]){"/usr/bin/sbreload", NULL}, &log, &err);
         if(status!=0) [AppDelegate showMesage:[NSString stringWithFormat:@"%@\n\nstderr:\n%@",log,err] title:[NSString stringWithFormat:@"code (%d)",status]];
