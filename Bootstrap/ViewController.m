@@ -141,14 +141,14 @@ OSStatus SecCodeCopySigningInformation(SecStaticCodeRef code, SecCSFlags flags, 
     
     struct utsname systemInfo;
     uname(&systemInfo);
-    [AppDelegate addLogText:[NSString stringWithFormat:@"device-model: %s",systemInfo.machine]];
+    [AppDelegate addLogText:[NSString stringWithFormat:NSLocalizedString(@"device-model: %s", @""), systemInfo.machine]];
     
-    [AppDelegate addLogText:[NSString stringWithFormat:@"app-version: %@/%@",NSBundle.mainBundle.infoDictionary[@"CFBundleVersion"],NSBundle.mainBundle.infoDictionary[@"CFBundleShortVersionString"]]];
+    [AppDelegate addLogText:[NSString stringWithFormat:NSLocalizedString(@"app-version: %@/%@", @""), NSBundle.mainBundle.infoDictionary[@"CFBundleVersion"],NSBundle.mainBundle.infoDictionary[@"CFBundleShortVersionString"]]];
     
-    [AppDelegate addLogText:[NSString stringWithFormat:@"boot-session: %@",getBootSession()]];
+    [AppDelegate addLogText:[NSString stringWithFormat:NSLocalizedString(@"boot-session: %@", @""), getBootSession()]];
     
-    [AppDelegate addLogText: isBootstrapInstalled()? @"bootstrap installed":@"bootstrap not installed"];
-    [AppDelegate addLogText: isSystemBootstrapped()? @"system bootstrapped":@"system not bootstrapped"];
+    [AppDelegate addLogText: isBootstrapInstalled()? NSLocalizedString(@"bootstrap installed", @"") : NSLocalizedString(@"bootstrap not installed", @"")];
+    [AppDelegate addLogText: isSystemBootstrapped()? NSLocalizedString(@"system bootstrapped", @"") : NSLocalizedString(@"system not bootstrapped", @"")];
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         usleep(1000*500);
