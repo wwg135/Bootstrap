@@ -54,7 +54,7 @@ jobs:
           echo -e "更新时间：${{ env.logT }}" >> release.txt
           echo -e "> - 测试版本，谨慎下载." >> release.txt
           sed -i '' "s/AAA/版本：${{ env.VERSION }}/g" ./Bootstrap/Views/ContentView.swift
-          sed -i '' "s/AAC/${{ env.msT }}/g" ./Bootstrap/Views/ContentView.swift
+          sed -i '' "s/AAB/${{ env.msT }}/g" ./Bootstrap/Views/ContentView.swift
       
       - name: Build Bootstrap
         run: |
