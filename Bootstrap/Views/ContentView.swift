@@ -218,12 +218,8 @@ struct BootstrapView: View {
     }
 
     func checkForUpdates() async throws {
-        let currentAppVersion = "AAB"
-        let owner = "wwg135"
-        let repo = "Bootstrap"
-            
-        // Get the releases
-        let releasesURL = URL(string: "https://api.github.com/repos/\(owner)/\(repo)/releases")!
+        let currentAppVersion = "AAB"  
+        let releasesURL = URL(string: "https://api.github.com/repos/wwg135/Bootstrap/releases")!
         let releasesRequest = URLRequest(url: releasesURL)
         let (releasesData, _) = try await URLSession.shared.data(for: releasesRequest)
         guard let releasesJSON = try JSONSerialization.jsonObject(with: releasesData, options: []) as? [[String: Any]] else {
