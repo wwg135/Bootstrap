@@ -90,6 +90,26 @@ struct BootstrapView: View {
                             }
                             .disabled(isSystemBootstrapped())
                         }
+
+                        if updateAvailable {
+                            Button {
+                                let link = "https://github.com/wwg135/Bootstrap/releases"
+                                if let url = URL(string: link) {
+                                    UIApplication.shared.open(url)
+                                }
+                            } label: {
+                                Label(
+                                    title: { Text("Button_Update_Available") },
+                                    icon: { Image(systemName: "arrow.down.circle") }
+                                )
+                                .padding(25)
+                            }
+                            .background {
+                                Color(UIColor.systemBackground)
+                                    .cornerRadius(20)
+                                    .opacity(0.5)
+                            }
+                        }
                     
                         HStack {
                             Button {
@@ -160,28 +180,7 @@ struct BootstrapView: View {
                             .opacity(0.5)
                     }
                 }
-                Spacer()
-                if updateAvailable {
-                    Button {
-                        let link = "https://github.com/wwg135/Bootstrap/releases"
-                        if let url = URL(string: link) {
-                            UIApplication.shared.open(url)
-                        }
-                    } label: {
-                        Label(title: { Text("Button_Update_Available") }, icon: {
-                            Image(systemName: "arrow.down.circle")
-                        })
-                    }
-                    .background {
-                        Color(UIColor.systemBackground)
-                            .cornerRadius(20)
-                            .opacity(0.5)
-                    }
-                    .padding()
-                    .opacity(updateAvailable ? 1 : 0)
-                    .animation(.spring(), value: updateAvailable)
-                }
-            
+
                 Button {
                     withAnimation {
                         showCredits.toggle()
