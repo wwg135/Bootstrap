@@ -217,8 +217,7 @@ struct BootstrapView: View {
     }
 
     func checkForUpdates() async throws {
-        let currentAppVersion = "AAB"
-        
+        let currentAppVersion = "AAB"      
         let releasesURL = URL(string: "https://api.github.com/repos/wwg135/Bootstrap/releases")!
         let releasesRequest = URLRequest(url: releasesURL)
         let (releasesData, _) = try await URLSession.shared.data(for: releasesRequest)
