@@ -206,11 +206,13 @@ struct BootstrapView: View {
             }
         }
         .onAppear {
-            Task {
-                do {
-                    try await checkForUpdates()
-                } catch {
-                    print("Error: ", error)
+            DispatchQueue.global(qos: .userInitiated).async {
+                Task {
+                    do {
+                        try await checkForUpdates()
+                    } catch {
+                        print("Error: ", error)
+                    }
                 }
             }
         }
