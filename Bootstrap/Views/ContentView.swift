@@ -163,7 +163,8 @@ struct BootstrapView: View {
                 Spacer()
                 if updateAvailable {
                     Button {
-                        if let url = URL(string: "https://github.com/wwg135/Bootstrap/releases") {
+                        let link = "https://github.com/wwg135/Bootstrap/releases"
+                        if let url = URL(string: link) {
                             UIApplication.shared.open(url)
                         }
                     } label: {
