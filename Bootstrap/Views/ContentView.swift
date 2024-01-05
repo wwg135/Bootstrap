@@ -160,9 +160,7 @@ struct BootstrapView: View {
                             .opacity(0.5)
                     }
                 }
-
-                spacer
-
+                Spacer()
                 if updateAvailable {
                     Button {
                         if let url = URL(string: link) {
