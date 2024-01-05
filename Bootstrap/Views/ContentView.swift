@@ -218,7 +218,7 @@ struct BootstrapView: View {
     }
 
     func checkForUpdates() async throws {
-        let currentAppVersion = "AAC"
+        let currentAppVersion = "AAB"
         let owner = "wwg135"
         let repo = "Bootstrap"
             
