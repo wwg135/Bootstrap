@@ -160,6 +160,28 @@ struct BootstrapView: View {
                             .opacity(0.5)
                     }
                 }
+
+                spacer
+
+                if updateAvailable {
+                    Button {
+                        if let url = URL(string: link) {
+                            UIApplication.shared.open(url)
+                        }
+                    } label: {
+                        Label(title: { Text("Button_Update_Available") }, icon: {
+                            Image(systemName: "arrow.down.circle")
+                        })
+                    }
+                    .background {
+                        Color(UIColor.systemBackground)
+                            .cornerRadius(20)
+                            .opacity(0.5)
+                    }
+                    .padding()
+                    .opacity(updateAvailable ? 1 : 0)
+                    .animation(.spring(), value: updateAvailable)
+                }
             
                 Button {
                     withAnimation {
