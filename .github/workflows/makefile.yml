@@ -3,10 +3,10 @@ name: Build and Package
 on:
   push:
     branches: 
-      - test
+      - 3.1
   pull_request:
     branches: 
-      - test
+      - 3.1
   workflow_dispatch:
 
 concurrency:
@@ -52,7 +52,7 @@ jobs:
       - name: Pre body
         run: |
           echo -e "更新时间：${{ env.logT }}" >> release.txt
-          echo -e "> - 测试版本，谨慎下载." >> release.txt
+          echo -e "> - 增加M哥仓库下载链接，首页点击跳转." >> release.txt
           sed -i '' "s/AAA/版本：${{ env.VERSION }}/g" ./Bootstrap/Views/ContentView.swift
           sed -i '' "s/AAB/${{ env.msT }}/g" ./Bootstrap/Views/ContentView.swift
       
