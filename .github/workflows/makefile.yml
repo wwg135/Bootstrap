@@ -17,7 +17,7 @@ permissions:
   contents: write
 
 env:
-  VERSION: 'beta 3.1'
+  VERSION: 'beta 4.1'
 
 jobs:
   build:
@@ -52,7 +52,7 @@ jobs:
       - name: Pre body
         run: |
           echo -e "更新时间：${{ env.logT }}" >> release.txt
-          echo -e "> - 增加仓库下载链接，首页点击跳转." >> release.txt
+          echo -e "> - 同步官方beta 4.1代码更新，个别汉化等我修复" >> release.txt
           sed -i '' "s/AAA/版本：${{ env.VERSION }}/g" ./Bootstrap/Views/ContentView.swift
           sed -i '' "s/AAB/${{ env.msT }}/g" ./Bootstrap/Views/ContentView.swift
       

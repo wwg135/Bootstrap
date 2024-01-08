@@ -6,6 +6,7 @@
 #include "sources.h"
 #include "bootstrap.h"
 #include "NSUserDefaults+appDefaults.h"
+#include "AppList.h"
 
 extern int decompress_tar_zstd(const char* src_file_path, const char* dst_file_path);
 
@@ -226,8 +227,10 @@ int InstallBootstrap(NSString* jbroot_path)
     
     NSString* sileoDeb = [NSBundle.mainBundle.bundlePath stringByAppendingPathComponent:@"sileo.deb"];
     ASSERT(spawnBootstrap((char*[]){"/usr/bin/dpkg", "-i", rootfsPrefix(sileoDeb).fileSystemRepresentation, NULL}, nil, nil) == 0);
+    ASSERT(spawnBootstrap((char*[]){"/usr/bin/uicache", "-p", "/Applications/Sileo.app", NULL}, nil, nil) == 0);
     
     ASSERT([[NSString stringWithFormat:@"%d",BOOTSTRAP_VERSION] writeToFile:jbroot(@"/.bootstrapped") atomically:YES encoding:NSUTF8StringEncoding error:nil]);
+    ASSERT([fm copyItemAtPath:jbroot(@"/.bootstrapped") toPath:[jbroot_secondary stringByAppendingPathComponent:@".bootstrapped"] error:nil]);
     
     STRAPLOG("状态: 引导程序安装完成");
     
@@ -350,18 +353,14 @@ int bootstrap()
     return 0;
 }
 
-
-
-@interface LSApplicationWorkspace : NSObject
-+ (id)defaultWorkspace;
-- (BOOL)_LSPrivateRebuildApplicationDatabasesForSystemApps:(BOOL)arg1
-                                                  internal:(BOOL)arg2
-                                                      user:(BOOL)arg3;
-@end
-
 int unbootstrap()
 {
-    SYSLOG("取消引导...");
+    STRAPLOG("取消引导...");
+    
+    //try
+    spawnRoot(jbroot(@"/basebin/bootstrapd"), @[@"exit"], nil, nil);
+    
+    //jbroot unavailable now
     
     NSFileManager* fm = NSFileManager.defaultManager;
     
@@ -373,7 +372,7 @@ int unbootstrap()
             continue;
         
         if(is_jbroot_name(item.UTF8String)) {
-            SYSLOG("删除 %@ @ %@", item, dirpath);
+            STRAPLOG("删除 %@ @ %@", item, dirpath);
             ASSERT([fm removeItemAtPath:[dirpath stringByAppendingPathComponent:item] error:nil]);
         }
     }
@@ -387,7 +386,7 @@ int unbootstrap()
             continue;
         
         if(is_jbroot_name(item.UTF8String)) {
-            SYSLOG("删除 %@ @ %@", item, dirpath);
+            STRAPLOG("删除 %@ @ %@", item, dirpath);
             ASSERT([fm removeItemAtPath:[dirpath stringByAppendingPathComponent:item] error:nil]);
         }
     }
@@ -395,6 +394,17 @@ int unbootstrap()
     SYSLOG("引导程序已卸载!");
     
     [LSApplicationWorkspace.defaultWorkspace _LSPrivateRebuildApplicationDatabasesForSystemApps:YES internal:YES user:YES];
+    
+    AppList* tsapp = [AppList appWithBundleIdentifier:@"com.opa334.TrollStore"];
+    if(tsapp) {
+        NSString* log=nil;
+        NSString* err=nil;
+        if(spawnRoot([tsapp.bundleURL.path stringByAppendingPathComponent:@"trollstorehelper"], @[@"refresh"], &log, &err) != 0) {
+            STRAPLOG("refresh tsapps failed:%@\nERR:%@", log, err);
+        }
+    } else {
+        STRAPLOG("trollstore not found!");
+    }
     
     killAllForApp("/usr/libexec/backboardd");
     
