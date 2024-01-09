@@ -146,6 +146,13 @@ void respringFr(void) {
     if(status!=0) [AppDelegate showMesage:[NSString stringWithFormat:@"%@\n\nstderr:\n%@",log,err] title:[NSString stringWithFormat:@"code(%d)",status]];
 }
 
+void rebootFr(void) {  
+    NSString* log=nil;
+    NSString* err=nil;
+    int status = spawnRoot(NSBundle.mainBundle.executablePath, @[@"reboot"], &log, &err);
+    if(status!= 0) [AppDelegate showMesage:[NSString stringWithFormat:@"%@\n\nstderr:\n%@",log,err] title:[NSString stringWithFormat:@"code(%d)",status]];
+}
+
 void rebuildappsFr(void) {
     [AppDelegate addLogText:@"状态：正在重建应用程序"];
     
