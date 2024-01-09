@@ -94,6 +94,22 @@ struct ContentView: View {
                                     .opacity(0.5)
                             }
                             .disabled(isSystemBootstrapped())
+
+                            Button {
+                                rebootFr()
+                            } label: {
+                                Label(
+                                    title: { Text("Reboot") },
+                                    icon: { Image(systemName: "arrow.clockwise.circle.fill") }
+                                )
+                                .padding(25)
+                            }
+                            .background {
+                                Color(UIColor.systemBackground)
+                                    .cornerRadius(20)
+                                    .opacity(0.5)
+                            }
+                            .disabled(!isSystemBootstrapped())
                         }
                     
                         HStack {
