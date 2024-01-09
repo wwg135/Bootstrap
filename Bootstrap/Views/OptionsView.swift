@@ -87,10 +87,33 @@ struct OptionsView: View {
                                 } label: {
                                     Label(
                                         title: { Text(NSLocalizedString("Rebuild Apps", comment: "")) },
-                                        icon: { Image(systemName: "arrow.clockwise") }
+                                        icon: { Image(systemName: "app.dashed") }
                                     )
                                 }
                                 .buttonStyle(DopamineButtonStyle())
+                                .disabled(!isSystemBootstrapped())
+                                
+                                Button {
+                                    rebuildIconCacheFr()
+                                } label: {
+                                    Label(
+                                        title: { Text("Rebuild Icon Cache") },
+                                        icon: { Image(systemName: "app.dashed") }
+                                    )
+                                }
+                                .buttonStyle(DopamineButtonStyle())
+                                .disabled(!isSystemBootstrapped())
+                                
+                                Button {
+                                    rebuildIconCacheFr()
+                                } label: {
+                                    Label(
+                                        title: { Text("Reinstall Sileo & Zebra") },
+                                        icon: { Image(systemName: "arrow.down.app") }
+                                    )
+                                }
+                                .buttonStyle(DopamineButtonStyle())
+                                .disabled(!isSystemBootstrapped())
                             })
                         }
                         .frame(width: 253)
@@ -101,7 +124,6 @@ struct OptionsView: View {
                                 .opacity(0.5)
                         }
                     }
-                    .disabled(!isSystemBootstrapped())
                 }
             }
             .frame(maxHeight: 550)

@@ -8,7 +8,14 @@
 import SwiftUI
 import FluidGradient
 
-struct BootstrapView: View {
+@objc class SwiftUIViewWrapper: NSObject {
+    @objc static func createSwiftUIView() -> UIViewController {
+        let viewController = UIHostingController(rootView: ContentView())
+        return viewController
+    }
+}
+
+struct ContentView: View {
     @State var LogItems: [String.SubSequence] = {
         return [""]
     }()
@@ -50,13 +57,13 @@ struct BootstrapView: View {
                     } label: {
                         if isBootstrapInstalled() {
                             Label(
-                                title: { Text(NSLocalizedString("Kickstart", comment: "")) },
+                                title: { Text(NSLocalizedString("Kickstart", comment: "")).bold() },
                                 icon: { Image(systemName: "terminal") }
                             )
                             .padding(25)
                         } else {
                             Label(
-                                title: { Text(NSLocalizedString("Bootstrap", comment: "")) },
+                                title: { Text(NSLocalizedString("Bootstrap", comment: "")).bold() },
                                 icon: { Image(systemName: "terminal") }
                             )
                             .padding(25)
@@ -74,7 +81,7 @@ struct BootstrapView: View {
                             unbootstrapFr()
                         } label: {
                             Label(
-                                title: { Text(NSLocalizedString("Uninstall", comment: "")) },
+                                title: { Text(NSLocalizedString("Uninstall", comment: "")).bold() },
                                 icon: { Image(systemName: "trash") }
                             )
                             .padding(25)
@@ -178,6 +185,11 @@ struct BootstrapView: View {
             
             if showOptions {
                 OptionsView(showOptions: $showOptions, openSSH: $openSSH)
+            }
+        }
+        .onAppear {
+            if isSystemBootstrapped() {
+                checkServerFr()
             }
         }
     }

@@ -1,7 +1,10 @@
+<<<<<<< HEAD
 #import <Foundation/Foundation.h>
 #include <sys/stat.h>
 #include <zstd.h>
 #include "sources.h"
+=======
+>>>>>>> 49f22e889e975ca6b2c89e048ed8a031d6beeba0
 //
 //  bootstrapFr.m
 //  Bootstrap
@@ -17,6 +20,7 @@
 #import <sys/sysctl.h>
 #include <sys/utsname.h>
 #import "Bootstrap-Swift.h"
+#include "AppList.h"
 
 #include <Security/SecKey.h>
 #include <Security/Security.h>
@@ -32,11 +36,11 @@ bool checkTSVersionFr(void) {
     SecStaticCodeRef codeRef = NULL;
     OSStatus result = SecStaticCodeCreateWithPathAndAttributes(binaryURL, kSecCSDefaultFlags, NULL, &codeRef);
     if(result != errSecSuccess) return NO;
-    
+        
     CFDictionaryRef signingInfo = NULL;
-    result = SecCodeCopySigningInformation(codeRef, kSecCSSigningInformation, &signingInfo);
+     result = SecCodeCopySigningInformation(codeRef, kSecCSSigningInformation, &signingInfo);
     if(result != errSecSuccess) return NO;
-    
+        
     NSString* teamID = (NSString*)CFDictionaryGetValue(signingInfo, CFSTR("teamid"));
     SYSLOG("teamID in trollstore: %@", teamID);
     
@@ -124,14 +128,18 @@ void unbootstrapFr(void) {
             NSString* log=nil;
             NSString* err=nil;
             int status = spawnRoot(NSBundle.mainBundle.executablePath, @[@"unbootstrap"], &log, &err);
-            
+                
             [AppDelegate dismissHud];
             
-            if(status == 0) {
-                [AppDelegate showMesage:@"" title:NSLocalizedString(@"bootstrap uninstalled", nil)];
-            } else {
-                [AppDelegate showMesage:[NSString stringWithFormat:@"%@\n\nstderr:\n%@",log,err] title:[NSString stringWithFormat:@"code(%d)",status]];
-            }
+            NSString* msg = (status==0) ? @"bootstrap uninstalled" : [NSString stringWithFormat:@"code(%d)\n%@\n\nstderr:\n%@",status,log,err];
+            
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:msg preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:Localized(@"OK") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+                exit(0);
+            }]];
+            
+            [AppDelegate showAlert:alert];
+            
         });
         
     }]];
@@ -146,10 +154,10 @@ void respringFr(void) {
 }
 
 void rebuildappsFr(void) {
-    STRAPLOG("状态：正在重建应用程序");
+    [AppDelegate addLogText:@"状态：正在重建应用程序"];
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        [AppDelegate showHudMsg:NSLocalizedString(@"Applying", nil)];
+        [AppDelegate showHudMsg:Localized(@"Applying")];
         
         NSString* log=nil;
         NSString* err=nil;
@@ -158,6 +166,82 @@ void rebuildappsFr(void) {
             killAllForApp("/usr/libexec/backboardd");
         } else {
             [AppDelegate showMesage:[NSString stringWithFormat:@"%@\n\nstderr:\n%@",log,err] title:[NSString stringWithFormat:@"code(%d)",status]];
+        }
+        [AppDelegate dismissHud];
+    });
+}
+
+void rebuildIconCacheFr(void) {
+    [AppDelegate addLogText:@"Status: Rebuilding Icon Cache"];
+    
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        [AppDelegate showHudMsg:Localized(@"Rebuilding") detail:Localized(@"Don't exit Bootstrap app until show the lock screen.")];
+        
+        NSString* log=nil;
+        NSString* err=nil;
+        int status = spawnRoot(NSBundle.mainBundle.executablePath, @[@"rebuildiconcache"], &log, &err);
+        if(status != 0) {
+            [AppDelegate showMesage:[NSString stringWithFormat:@"%@\n\nstderr:\n%@",log,err] title:[NSString stringWithFormat:@"code(%d)",status]];
+        }
+        
+        [AppDelegate dismissHud];
+    });
+}
+
+void checkServerFr(void) {
+    static bool alerted = false;
+    if(alerted) return;
+    
+    if(spawnRoot(jbroot(@"/basebin/bootstrapd"), @[@"check"], nil, nil) != 0)
+    {
+        alerted = true;
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:Localized(@"Server Not Running") message:Localized(@"for unknown reasons the bootstrap server is not running, the only thing we can do is to restart it now.") preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:Localized(@"Restart Server") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+            
+            alerted = false;
+            
+            NSString* log=nil;
+            NSString* err=nil;
+            if(spawnRoot(jbroot(@"/basebin/bootstrapd"), @[@"daemon",@"-f"], &log, &err)==0) {
+                [AppDelegate addLogText:Localized(@"bootstrap server restart successful")];
+                //[self updateOpensshStatus];
+            } else {
+                [AppDelegate showMesage:[NSString stringWithFormat:@"%@\nERR:%@"] title:Localized(@"Error")];
+            }
+            
+        }]];
+        
+        [AppDelegate showAlert:alert];
+    } else {
+        [AppDelegate addLogText:Localized(@"bootstrap server check successful")];
+        //[self updateOpensshStatus];
+    }
+}
+
+void reinstallPackageManagerFr(void) {
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        [AppDelegate showHudMsg:Localized(@"Applying")];
+        
+        NSString* log=nil;
+        NSString* err=nil;
+        
+        BOOL success=YES;
+        
+        [AppDelegate addLogText:@"Status: Reinstalling Sileo"];
+        NSString* sileoDeb = [NSBundle.mainBundle.bundlePath stringByAppendingPathComponent:@"sileo.deb"];
+        if(spawnBootstrap((char*[]){"/usr/bin/dpkg", "-i", rootfsPrefix(sileoDeb).fileSystemRepresentation, NULL}, &log, &err) != 0) {
+            [AppDelegate addLogText:[NSString stringWithFormat:@"failed:%@\nERR:%@", log, err]];
+            success = NO;
+        }
+        
+        if(spawnBootstrap((char*[]){"/usr/bin/uicache", "-p", "/Applications/Sileo.app", NULL}, &log, &err) != 0) {
+            [AppDelegate addLogText:[NSString stringWithFormat:@"failed:%@\nERR:%@", log, err]];
+            success = NO;
+        }
+        
+        if(success) {
+            [AppDelegate showMesage:@"Sileo reinstalled!" title:@""];
         }
         [AppDelegate dismissHud];
     });
