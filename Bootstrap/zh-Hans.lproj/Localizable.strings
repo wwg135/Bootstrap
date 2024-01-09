@@ -1,53 +1,53 @@
-	/* No comment provided by engineer. */
- "Bootstrapped" = "已安装";
+/* No comment provided by engineer. */
+"Bootstrapped" = "已安装";
 
- /* No comment provided by engineer. */
- "Bootstrap" = "安装";
+/* No comment provided by engineer. */
+"Bootstrap" = "安装";
 
- /* No comment provided by engineer. */
- "Install" = "安装";
+/* No comment provided by engineer. */
+"Install" = "安装";
 
- /* No comment provided by engineer. */
- "Unsupported" = "不支持";
+/* No comment provided by engineer. */
+"Unsupported" = "不支持";
 
- /* No comment provided by engineer. */
- "The current iOS version is not supported yet, we may add support in a future version." = "当前 iOS 版本尚不支持，我们可能会在未来版本中添加支持。";
+/* No comment provided by engineer. */
+"The current iOS version is not supported yet, we may add support in a future version." = "当前 iOS 版本尚不支持，我们可能会在未来版本中添加支持。";
 
- /* No comment provided by engineer. */
- "ios-version: %@" = "ios版本: %@";
+/* No comment provided by engineer. */
+"ios-version: %@" = "ios版本: %@";
 
- /* No comment provided by engineer. */
- "device-model: %s" = "\n设备型号: %s";
+/* No comment provided by engineer. */
+"device-model: %s" = "\n设备型号: %s";
 
- /* No comment provided by engineer. */
- "app-version: %@/%@" = "\n应用版本: %@/%@";
+/* No comment provided by engineer. */
+"app-version: %@/%@" = "\n应用版本: %@/%@";
 
- /* No comment provided by engineer. */
- "boot-session: %@" = "\n启动会话: %@";
+/* No comment provided by engineer. */
+"boot-session: %@" = "\n启动会话: %@";
 
- /* No comment provided by engineer. */
- "bootstrap installed" = "\n引导已安装";
+/* No comment provided by engineer. */
+"bootstrap installed" = "\n引导已安装";
 
- /* No comment provided by engineer. */
- "bootstrap not installed" = "\n引导未安装";
+/* No comment provided by engineer. */
+"bootstrap not installed" = "\n引导未安装";
 
- /* No comment provided by engineer. */
- "system bootstrapped" = "\n系统已引导";
+/* No comment provided by engineer. */
+"system bootstrapped" = "\n系统已引导";
 
- /* No comment provided by engineer. */
- "system not bootstrapped" = "\n系统未引导\n";
+/* No comment provided by engineer. */
+"system not bootstrapped" = "\n系统未引导\n";
 
- /* No comment provided by engineer. */
- "\n:::Credits:::\n" = "\n:::感谢:::\n";
+/* No comment provided by engineer. */
+"\n:::Credits:::\n" = "\n:::感谢:::\n";
 
- /* No comment provided by engineer. */
- "\nThanks to these guys, we couldn't have completed this project without their help!" = "\n感谢以上所有朋友，没有他们的帮助，我们就不可能完成这个项目！";
+/* No comment provided by engineer. */
+"\nThanks to these guys, we couldn't have completed this project without their help!" = "\n感谢以上所有朋友，没有他们的帮助，我们就不可能完成这个项目！";
 
- /* No comment provided by engineer. */
- "Server Not Running" = "服务未运行";
+/* No comment provided by engineer. */
+"Server Not Running" = "服务未运行";
 
- /* No comment provided by engineer. */
- "For unknown reasons the bootstrap server is not running, the only thing we can do is to restart it now." = "由于未知的原因，引导程序没有运行，我们现在唯一能做的就是重新启动它。";
+/* No comment provided by engineer. */
+"For unknown reasons the bootstrap server is not running, the only thing we can do is to restart it now." = "由于未知的原因，引导程序没有运行，我们现在唯一能做的就是重新启动它。";
 
  /* No comment provided by engineer. */
  "Restart Server" = "重启引导程序";
