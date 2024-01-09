@@ -168,3 +168,6 @@
 
 /* No comment provided by engineer. */
 "Reinstall Sileo" = "重装Sileo商店"; 
+
+/* No comment provided by engineer. */
+"Sileo reinstalled!" = "Sileo商店重装成功";
