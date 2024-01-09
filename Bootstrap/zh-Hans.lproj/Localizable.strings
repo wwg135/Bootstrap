@@ -186,3 +186,9 @@
 
 /* No comment provided by engineer. */
 "Reboot" = "重启";
+
+/* No comment provided by engineer. */
+"Sure" = "确定";
+
+/* No comment provided by engineer. */
+"Are you sure you want to reboot device?" = "你确定重启设备吗？";
