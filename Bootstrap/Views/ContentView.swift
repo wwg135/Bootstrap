@@ -57,9 +57,15 @@ struct ContentView: View {
                         Button {
                             bootstrapFr()
                         } label: {
-                            if isBootstrapInstalled() && isSystemBootstrapped() {
+                            if isBootstrapInstalled() {
                                 Label(
                                     title: { Text("Kickstart") },
+                                    icon: { Image(systemName: "terminal") }
+                                )
+                                .padding(25)
+                            } else if !isSystemBootstrapped() {
+                                Label(
+                                    title: { Text("Leadstart") },
                                     icon: { Image(systemName: "terminal") }
                                 )
                                 .padding(25)
