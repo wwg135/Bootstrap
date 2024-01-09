@@ -3,10 +3,10 @@ name: Build and Package
 on:
   push:
     branches: 
-      - test
+      - 4.2
   pull_request:
     branches: 
-      - test
+      - 4.2
   workflow_dispatch:
 
 concurrency:
@@ -52,7 +52,7 @@ jobs:
       - name: Pre body
         run: |
           echo -e "更新时间：${{ env.logT }}" >> release.txt
-          echo -e "> - 测试版本，请勿下载这个" >> release.txt
+          echo -e "> - 首页添加“重启”按钮，方便重启设备卸载引导程序" >> release.txt
           sed -i '' "s/AAA/版本：${{ env.VERSION }}/g" ./Bootstrap/Views/ContentView.swift
       
       - name: Build Bootstrap
@@ -65,7 +65,7 @@ jobs:
         with:
           name: Bootstrap_${{ env.VERSION }}
           tag_name: ${{ env.msT }}
-          target_commitish: test
+          target_commitish: 4.2
           body_path: release.txt
           latest: true
           token: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
