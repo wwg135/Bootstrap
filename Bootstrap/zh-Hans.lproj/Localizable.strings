@@ -171,3 +171,12 @@
 
 /* No comment provided by engineer. */
 "Sileo reinstalled!" = "Sileo商店重装成功";
+
+/* No comment provided by engineer. */
+"Status: Reinstalling Sileo" = "状态：正在安装Sileo商店";
+
+/* No comment provided by engineer. */
+"Rebuilding" = "正在重建...";
+
+/* No comment provided by engineer. */
+"Status: Rebuilding Icon Cache" = "\n正在重建图标缓存";
