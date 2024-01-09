@@ -180,3 +180,6 @@
 
 /* No comment provided by engineer. */
 "Status: Rebuilding Icon Cache" = "\n状态：正在重建图标缓存";
+
+/* No comment provided by engineer. */
+"Status: Rebuilding Apps" = "状态：正在重建应用程序";
