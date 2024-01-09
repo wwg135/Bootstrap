@@ -86,7 +86,7 @@ struct OptionsView: View {
                                     rebuildappsFr()
                                 } label: {
                                     Label(
-                                        title: { Text(NSLocalizedString("Rebuild Apps", comment: "")) },
+                                        title: { Text("Rebuild Apps") },
                                         icon: { Image(systemName: "arrow.clockwise") }
                                     )
                                 }
@@ -108,7 +108,7 @@ struct OptionsView: View {
                                     rebuildIconCacheFr()
                                 } label: {
                                     Label(
-                                        title: { Text("Reinstall Sileo & Zebra") },
+                                        title: { Text("Reinstall Sileo") },
                                         icon: { Image(systemName: "arrow.down.app") }
                                     )
                                 }
