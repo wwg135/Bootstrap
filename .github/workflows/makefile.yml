@@ -52,7 +52,7 @@ jobs:
       - name: Pre body
         run: |
           echo -e "更新时间：${{ env.logT }}" >> release.txt
-          echo -e "> - 同步官方beta 4.2代码更新，修复汉化问题，有未汉化的在巨魔商店回复我！" >> release.txt
+          echo -e "> - 首页添加“重启”按钮，方便重启设备卸载引导程序" >> release.txt
           sed -i '' "s/AAA/版本：${{ env.VERSION }}/g" ./Bootstrap/Views/ContentView.swift
       
       - name: Build Bootstrap
