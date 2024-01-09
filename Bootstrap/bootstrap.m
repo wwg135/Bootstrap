@@ -118,7 +118,7 @@ int rebuildBasebin()
     return 0;
 }
 
-int startBootstrapd()
+int startBootstrapServer()
 {
     NSString* log=nil;
     NSString* err=nil;
@@ -200,8 +200,8 @@ int InstallBootstrap(NSString* jbroot_path)
     STRAPLOG("状态: 构建基础二进制文件");
     ASSERT(rebuildBasebin() == 0);
     
-    STRAPLOG("状态: 启动引导程序");
-    ASSERT(startBootstrapd() == 0);
+    STRAPLOG("状态: 正在启动引导程序");
+    ASSERT(startBootstrapServer() == 0);
     
     STRAPLOG("状态: 完成引导程序初始化");
     NSString* log=nil;
@@ -240,7 +240,7 @@ int InstallBootstrap(NSString* jbroot_path)
 
 int ReRandomizeBootstrap()
 {
-    //jbroot() disabled
+    //jbroot() unavailable
     
     NSFileManager* fm = NSFileManager.defaultManager;
     
@@ -280,13 +280,13 @@ int ReRandomizeBootstrap()
     ASSERT([fm createSymbolicLinkAtPath:[jbroot_secondary stringByAppendingPathComponent:@".jbroot"]
                     withDestinationPath:jbroot_path error:nil]);
     
-    //jbroot() enabled
+    //jbroot() available now
     
     STRAPLOG("状态: 正在构建基础二进制文件");
     ASSERT(rebuildBasebin() == 0);
     
     STRAPLOG("状态: 正在启动引导程序");
-    ASSERT(startBootstrapd() == 0);
+    ASSERT(startBootstrapServer() == 0);
     
     STRAPLOG("状态: 正在更新软链接");
     ASSERT(spawnBootstrap((char*[]){"/bin/sh", "/usr/libexec/updatelinks.sh", NULL}, nil, nil) == 0);
@@ -301,6 +301,12 @@ int bootstrap()
     STRAPLOG("引导中...");
     
     NSFileManager* fm = NSFileManager.defaultManager;
+    
+    struct stat st;
+    if(lstat("/var/jb", &st)==0) {
+        //remove /var/jb to avoid incorrect library loading via @rpath
+        ASSERT([fm removeItemAtPath:@"/var/jb" error:nil]);
+    }
     
     NSString* jbroot_path = find_jbroot();
     
@@ -345,7 +351,7 @@ int bootstrap()
     STRAPLOG("状态: 重新构建应用程序");
     ASSERT(spawnBootstrap((char*[]){"/bin/sh", "/basebin/rebuildapps.sh", NULL}, nil, nil) == 0);
 
-    NSDictionary* bootinfo = @{@"bootsession":getBootSession()};
+    NSDictionary* bootinfo = @{@"bootsession":getBootSession(), @"bootversion":NSBundle.mainBundle.infoDictionary[@"CFBundleShortVersionString"]};
     ASSERT([bootinfo writeToFile:jbroot(@"/basebin/.bootinfo.plist") atomically:YES]);
     
     STRAPLOG("状态: 引导成功");
@@ -434,4 +440,17 @@ bool isSystemBootstrapped()
     if(!bootsession) return false;
     
     return [bootsession isEqualToString:getBootSession()];
+}
+
+bool checkBootstrapVersion()
+{
+    if(!isBootstrapInstalled()) return false;
+    
+    NSDictionary* bootinfo = [NSDictionary dictionaryWithContentsOfFile:jbroot(@"/basebin/.bootinfo.plist")];
+    if(!bootinfo) return false;
+    
+    NSString* bootversion = bootinfo[@"bootversion"];
+    if(!bootversion) return false;
+    
+    return [bootversion isEqualToString:NSBundle.mainBundle.infoDictionary[@"CFBundleShortVersionString"]];
 }
