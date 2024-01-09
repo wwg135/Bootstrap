@@ -189,7 +189,7 @@ void checkServerFr(void) {
     {
         alerted = true;
         
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Server Not Running", nil) message:NSLocalizedString(@"for unknown reasons the bootstrap server is not running, the only thing we can do is to restart it now.", nil) preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Server Not Running", nil) message:NSLocalizedString(@"For unknown reasons the bootstrap server is not running, the only thing we can do is to restart it now.", nil) preferredStyle:UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Restart Server", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
             
             alerted = false;
