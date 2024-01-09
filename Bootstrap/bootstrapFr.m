@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-#import <Foundation/Foundation.h>
-#include <sys/stat.h>
-#include <zstd.h>
-#include "sources.h"
-=======
->>>>>>> 49f22e889e975ca6b2c89e048ed8a031d6beeba0
 //
 //  bootstrapFr.m
 //  Bootstrap
@@ -134,7 +127,7 @@ void unbootstrapFr(void) {
             NSString* msg = (status==0) ? @"bootstrap uninstalled" : [NSString stringWithFormat:@"code(%d)\n%@\n\nstderr:\n%@",status,log,err];
             
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:msg preferredStyle:UIAlertControllerStyleAlert];
-            [alert addAction:[UIAlertAction actionWithTitle:Localized(@"OK") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+            [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
                 exit(0);
             }]];
             
@@ -157,7 +150,7 @@ void rebuildappsFr(void) {
     [AppDelegate addLogText:@"状态：正在重建应用程序"];
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        [AppDelegate showHudMsg:Localized(@"Applying")];
+        [AppDelegate showHudMsg:NSLocalizedString(@"Applying", nil)];
         
         NSString* log=nil;
         NSString* err=nil;
@@ -175,7 +168,7 @@ void rebuildIconCacheFr(void) {
     [AppDelegate addLogText:@"Status: Rebuilding Icon Cache"];
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        [AppDelegate showHudMsg:Localized(@"Rebuilding") detail:Localized(@"Don't exit Bootstrap app until show the lock screen.")];
+        [AppDelegate showHudMsg:NSLocalizedString(@"Rebuilding", nil) detail:NSLocalizedString(@"Don't exit Bootstrap app until show the lock screen.", nil)];
         
         NSString* log=nil;
         NSString* err=nil;
@@ -196,8 +189,8 @@ void checkServerFr(void) {
     {
         alerted = true;
         
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:Localized(@"Server Not Running") message:Localized(@"for unknown reasons the bootstrap server is not running, the only thing we can do is to restart it now.") preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:Localized(@"Restart Server") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Server Not Running", nil) message:NSLocalizedString(@"for unknown reasons the bootstrap server is not running, the only thing we can do is to restart it now.", nil) preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Restart Server", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
             
             alerted = false;
             
@@ -214,14 +207,14 @@ void checkServerFr(void) {
         
         [AppDelegate showAlert:alert];
     } else {
-        [AppDelegate addLogText:Localized(@"bootstrap server check successful")];
+        [AppDelegate addLogText:NSLocalizedString(@"bootstrap server check successful", nil)];
         //[self updateOpensshStatus];
     }
 }
 
 void reinstallPackageManagerFr(void) {
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        [AppDelegate showHudMsg:Localized(@"Applying")];
+        [AppDelegate showHudMsg:NSLocalizedString(@"Applying", nil)];
         
         NSString* log=nil;
         NSString* err=nil;
@@ -241,7 +234,7 @@ void reinstallPackageManagerFr(void) {
         }
         
         if(success) {
-            [AppDelegate showMesage:@"Sileo reinstalled!" title:@""];
+            [AppDelegate showMesage:NSLocalizedString(@"Sileo reinstalled!", nil) title:@""];
         }
         [AppDelegate dismissHud];
     });
