@@ -81,6 +81,7 @@ struct OptionsView: View {
                                     )
                                 }
                                 .buttonStyle(DopamineButtonStyle())
+                                .disabled(!isSystemBootstrapped())
                                 
                                 Button {
                                     rebuildappsFr()
