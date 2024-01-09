@@ -63,7 +63,7 @@ struct ContentView: View {
                                     icon: { Image(systemName: "terminal") }
                                 )
                                 .padding(25)
-                            } else if !isSystemBootstrapped() {
+                            } else if isBootstrapInstalled() && !isSystemBootstrapped() {
                                 Label(
                                     title: { Text("Leadstart") },
                                     icon: { Image(systemName: "terminal") }
