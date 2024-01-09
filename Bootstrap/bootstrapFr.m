@@ -197,10 +197,10 @@ void checkServerFr(void) {
             NSString* log=nil;
             NSString* err=nil;
             if(spawnRoot(jbroot(@"/basebin/bootstrapd"), @[@"daemon",@"-f"], &log, &err)==0) {
-                [AppDelegate addLogText:Localized(@"bootstrap server restart successful")];
+                [AppDelegate addLogText:NSLocalizedString(@"bootstrap server restart successful", nil)];
                 //[self updateOpensshStatus];
             } else {
-                [AppDelegate showMesage:[NSString stringWithFormat:@"%@\nERR:%@"] title:Localized(@"Error")];
+                [AppDelegate showMesage:[NSString stringWithFormat:@"%@\nERR:%@"] title:NSLocalizedString(@"Error", nil)];
             }
             
         }]];
