@@ -102,7 +102,7 @@ void bootstrapFr(void) {
                 [AppDelegate addLogText:[NSString stringWithFormat:NSLocalizedString(@"openssh launch faild(%d):\n%@\n%@", nil), status, log, err]];
         }
         
-        [AppDelegate addLogText:@"respring now..."]; sleep(1);
+        [AppDelegate addLogText:NSLocalizedString(@"respring now...", nil)]; sleep(1);
         
         status = spawnBootstrap((char*[]){"/usr/bin/sbreload", NULL}, &log, &err);
         if(status!=0) [AppDelegate showMesage:[NSString stringWithFormat:@"%@\n\nstderr:\n%@",log,err] title:[NSString stringWithFormat:@"code(%d)",status]];
@@ -165,7 +165,7 @@ void rebuildappsFr(void) {
 }
 
 void rebuildIconCacheFr(void) {
-    [AppDelegate addLogText:@"Status: Rebuilding Icon Cache"];
+    [AppDelegate addLogText:NSLocalizedString(@"Status: Rebuilding Icon Cache", nil)];
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         [AppDelegate showHudMsg:NSLocalizedString(@"Rebuilding", nil) detail:NSLocalizedString(@"Don't exit Bootstrap app until show the lock screen.", nil)];
@@ -221,7 +221,7 @@ void reinstallPackageManagerFr(void) {
         
         BOOL success=YES;
         
-        [AppDelegate addLogText:@"Status: Reinstalling Sileo"];
+        [AppDelegate addLogText:NSLocalizedString(@"Status: Reinstalling Sileo", nil)];
         NSString* sileoDeb = [NSBundle.mainBundle.bundlePath stringByAppendingPathComponent:@"sileo.deb"];
         if(spawnBootstrap((char*[]){"/usr/bin/dpkg", "-i", rootfsPrefix(sileoDeb).fileSystemRepresentation, NULL}, &log, &err) != 0) {
             [AppDelegate addLogText:[NSString stringWithFormat:@"failed:%@\nERR:%@", log, err]];
