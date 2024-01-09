@@ -45,7 +45,7 @@ OSStatus SecCodeCopySigningInformation(SecStaticCodeRef code, SecCSFlags flags, 
     
     [vc didMoveToParentViewController:self];
     
-    [AppDelegate addLogText:[NSString stringWithFormat:@"ios-version: %@",UIDevice.currentDevice.systemVersion]];
+    [AppDelegate addLogText:[NSString stringWithFormat:NSLocalizedString(@"ios-version: %@", @""),UIDevice.currentDevice.systemVersion]];
     
     struct utsname systemInfo;
     uname(&systemInfo);

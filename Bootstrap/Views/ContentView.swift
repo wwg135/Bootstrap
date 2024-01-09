@@ -46,7 +46,7 @@ struct ContentView: View {
                             Text(" Bootstrap ")
                                 .bold()
                                 .font(Font.system(size: 35))
-                            Text(NSLocalizedString("AAA", comment: ""))
+                            Text("AAA")
                                 .font(Font.system(size: 20))
                                 .opacity(0.5)
                         })
