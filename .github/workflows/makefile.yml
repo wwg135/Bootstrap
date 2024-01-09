@@ -3,10 +3,10 @@ name: Build and Package
 on:
   push:
     branches: 
-      - 3.1
+      - 4.1
   pull_request:
     branches: 
-      - 3.1
+      - 4.1
   workflow_dispatch:
 
 concurrency:
@@ -52,9 +52,8 @@ jobs:
       - name: Pre body
         run: |
           echo -e "更新时间：${{ env.logT }}" >> release.txt
-          echo -e "> - 同步官方beta 4.1代码更新，个别汉化等我修复" >> release.txt
+          echo -e "> - 同步官方beta 4.1代码更新，修复汉化问题，有未汉化的在巨魔商店回复我！" >> release.txt
           sed -i '' "s/AAA/版本：${{ env.VERSION }}/g" ./Bootstrap/Views/ContentView.swift
-          sed -i '' "s/AAB/${{ env.msT }}/g" ./Bootstrap/Views/ContentView.swift
       
       - name: Build Bootstrap
         run: |
@@ -66,7 +65,7 @@ jobs:
         with:
           name: Bootstrap_${{ env.VERSION }}
           tag_name: ${{ env.msT }}
-          target_commitish: 3.1
+          target_commitish: 4.1
           body_path: release.txt
           latest: true
           token: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
