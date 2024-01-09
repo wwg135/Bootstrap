@@ -105,7 +105,7 @@ struct OptionsView: View {
                                 .disabled(!isSystemBootstrapped())
                                 
                                 Button {
-                                    rebuildIconCacheFr()
+                                    reinstallPackageManagerFr()
                                 } label: {
                                     Label(
                                         title: { Text("Reinstall Sileo") },
