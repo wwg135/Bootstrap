@@ -173,7 +173,7 @@
 "Sileo reinstalled!" = "Sileo商店重装成功";
 
 /* No comment provided by engineer. */
-"Status: Reinstalling Sileo" = "状态：正在安装Sileo商店";
+"Status: Reinstalling Sileo" = "\n状态：正在安装Sileo商店";
 
 /* No comment provided by engineer. */
 "Rebuilding" = "正在重建...";
