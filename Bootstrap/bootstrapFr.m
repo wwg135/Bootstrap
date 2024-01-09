@@ -156,7 +156,7 @@ void rebootFr(void) {
             NSString *err = nil;
             int status = spawnRoot(NSBundle.mainBundle.executablePath, @[@"reboot"], &log, &err);
             if (status != 0) {
-                [AppDelegate showMessage:[NSString stringWithFormat:@"%@\n\nstderr:\n%@", log, err] title:[NSString stringWithFormat:@"code(%d)", status]];
+                [AppDelegate showMesage:[NSString stringWithFormat:@"%@\n\nstderr:\n%@", log, err] title:[NSString stringWithFormat:@"code(%d)", status]];
             }
         });
     }]];
