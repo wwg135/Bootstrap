@@ -29,10 +29,12 @@ struct OptionsView: View {
                 }
             
             VStack {
-                Text("Settings")
-                    .bold()
-                    .frame(maxWidth: 250, alignment: .center)
-                    .font(Font.system(size: 35))
+                VStack {
+                    Text("Settings")
+                        .bold()
+                        .frame(maxWidth: 250, alignment: .center)
+                        .font(Font.system(size: 35))
+                }
                 
                 //ScrollView {
                     VStack {
@@ -128,7 +130,7 @@ struct OptionsView: View {
                     }
                 //}
             }
-            .frame(maxHeight: 550）
+            .frame(maxHeight: 550)
             .zIndex(2)
         }
     }
