@@ -29,23 +29,10 @@ struct OptionsView: View {
                 }
             
             VStack {
-                HStack {
-                    Text("Settings")
-                        .bold()
-                        .frame(maxWidth: 250, alignment: .leading)
-                        .font(Font.system(size: 35))
-                    
-                    Button {
-                        withAnimation {
-                            showOptions.toggle()
-                        }
-                    } label: {
-                        Image(systemName: "xmark.circle")
-                            .resizable()
-                            .foregroundColor(.red)
-                            .frame(width: 30, height: 30)
-                    }
-                }
+                Text("Settings")
+                    .bold()
+                    .frame(maxWidth: 250, alignment: .leading)
+                    .font(Font.system(size: 35))
                 
                 //ScrollView {
                     VStack {
