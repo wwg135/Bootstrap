@@ -21,10 +21,12 @@ struct CreditsView: View {
                 }
             
             VStack {
-                Text("Credits")
-                    .bold()
-                    .frame(maxWidth: 250, alignment: .center )
-                    .font(Font.system(size: 35))
+                VStack {
+                    Text("Credits")
+                        .bold()
+                        .frame(maxWidth: 250, alignment: .center )
+                        .font(Font.system(size: 35))
+                }
                 
                 ScrollView {
                     VStack { 
