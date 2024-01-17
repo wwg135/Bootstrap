@@ -24,6 +24,10 @@ struct OptionsView: View {
         ZStack {
             VisualEffectView(effect: UIBlurEffect(style: .regular))
                 .ignoresSafeArea()
+                .onTapGesture {
+                   showOptions = false
+                }
+                .zIndex(2)
             
             VStack {
                 HStack {
