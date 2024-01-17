@@ -68,8 +68,7 @@ struct OptionsView: View {
 
                             Divider().padding(10)
                             
-                            VStack(alignment: .leading, spacing: 12, content: {
-                                
+                            VStack(alignment: .leading, spacing: 12, content: { 
                                 Button {
                                     UIImpactFeedbackGenerator(style: .light).impactOccurred()
                                     rebuildappsAction()
