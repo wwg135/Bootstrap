@@ -27,7 +27,6 @@ struct OptionsView: View {
                 .onTapGesture {
                    showOptions = false
                 }
-                .zIndex(2)
             
             VStack {
                 HStack {
