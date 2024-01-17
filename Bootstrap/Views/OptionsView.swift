@@ -141,7 +141,8 @@ struct OptionsView: View {
                     }
                 //}
             }
-            .frame(maxHeight: 550)
+            .frame(maxHeight: 550）
+            .zIndex(2)
         }
     }
 }
