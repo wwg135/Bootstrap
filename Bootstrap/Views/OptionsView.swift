@@ -129,6 +129,7 @@ struct OptionsView: View {
                             })
                         }
                         .frame(width: 253)
+                        .padding(20)
                         .background {
                             Color(UIColor.systemBackground)
                                 .cornerRadius(20)
