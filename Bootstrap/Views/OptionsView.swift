@@ -31,7 +31,7 @@ struct OptionsView: View {
             VStack {
                 Text("Settings")
                     .bold()
-                    .frame(maxWidth: 250, alignment: .leading)
+                    .frame(maxWidth: 250, alignment: .center)
                     .font(Font.system(size: 35))
                 
                 //ScrollView {
