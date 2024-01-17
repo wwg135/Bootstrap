@@ -67,6 +67,7 @@ struct OptionsView: View {
                             
 
                             Divider().padding(10)
+
                             
                             VStack(alignment: .leading, spacing: 12, content: {
             
