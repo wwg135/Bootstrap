@@ -3,10 +3,10 @@ name: Build and Package
 on:
   push:
     branches: 
-      - 1.0
+      - 1.1
   pull_request:
     branches: 
-      - 1.0
+      - 1.1
   workflow_dispatch:
 
 concurrency:
@@ -55,7 +55,7 @@ jobs:
       - name: Pre body
         run: |
           echo -e "更新时间：${{ env.logT }}" >> release.txt
-          echo -e "> - 同步官方1.1正式版更新！" >> release.txt
+          echo -e "> - 同步官方1.1正式版更新，修复应用程序通知问题！" >> release.txt
           sed -i '' "s/AAA/${{ env.msT }}/g" ./Bootstrap/Views/ContentView.swift
       
       - name: Build Bootstrap
