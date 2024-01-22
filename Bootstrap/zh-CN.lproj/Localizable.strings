@@ -79,6 +79,14 @@
 
 "Status: Reinstalling Sileo" = "状态：正在重装 Sileo";
 
+"ios-version: %@" = "ios版本: %@";
+
+"device-model: %s" = "设备型号: %s";
+
+"app-version: %@" = "应用版本: %@";
+
+"boot-session: %@" = "启动会话: %@";
+
 "Reboot" = "重启";
 
 "Sure" = "确定";
