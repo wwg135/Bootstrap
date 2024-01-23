@@ -110,7 +110,7 @@ void initFromSwiftUI()
         }
     }
 
-    DispatchQueue.global(qos: .userInitiated).async {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         //代码 1
         [AppDelegate addLogText:[NSString stringWithFormat:Localized(@"ios-version: %@"),UIDevice.currentDevice.systemVersion]];
         usleep(100000);
@@ -156,7 +156,7 @@ void initFromSwiftUI()
                 [AppDelegate showMesage:Localized(@"It seems that you have the Filza app installed, which may be detected as jailbroken. You can enable Tweak for it to hide it.") title:Localized(@"Warning")];
             }
         }
-    }
+    });
 }
 
 @end
