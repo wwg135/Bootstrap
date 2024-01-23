@@ -23,6 +23,7 @@ struct ContentView: View {
     @State private var showOptions = false
     @State private var showCredits = false
     @State private var showAppView = false
+    @State private var updateAvailable = false
     @State private var strapButtonDisabled = false
     @State private var newVersionAvailable = false
     @State private var newVersionReleaseURL:String = ""
@@ -57,15 +58,24 @@ struct ContentView: View {
                     })
                 }
                 .padding(20)
-                
+
                 if newVersionAvailable {
-                    HStack {
-                        Spacer()
-                        Menu {
+                    Button {
+                        updateAvailable.toggle()
+                    } label: {
+                        Label("New Version Available", systemImage: "arrow.down.app.fill")
+                            .padding(10)
+                            .background(Color.blue)
+                            .cornerRadius(8)
+                            .foregroundColor(.white)
+                    }
+                    .popover(isPresented: $updateAvailable) {
+                        VStack {
                             Button(action: {
                                 if let url = URL(string: newVersionReleaseURL) {
                                     UIApplication.shared.open(url)
                                 }
+                                updateAvailable.toggle()
                             }) {
                                 Label("GitHub Download", systemImage: "arrow.down.app.fill")
                             }
@@ -73,20 +83,14 @@ struct ContentView: View {
                                 if let url2 = URL(string: newVersionReleaseURL2) {
                                     UIApplication.shared.open(url2)
                                 }
+                                updateAvailable.toggle()
                             }) {
                                 Label("Install with TrollStore", systemImage: "arrow.up.bin.fill")
                             }
-                        } label: {
-                            Label("New Version Available", systemImage: "arrow.down.app.fill")
-                                .padding(10)
-                                .background(Color.blue)
-                                .cornerRadius(8)
-                                .foregroundColor(.white)
                         }
-                        Spacer()
+                        .padding()
                     }
                 }
-                Spacer()
                 
                 VStack {
                     Button {
