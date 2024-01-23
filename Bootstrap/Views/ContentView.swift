@@ -26,6 +26,7 @@ struct ContentView: View {
     @State private var strapButtonDisabled = false
     @State private var newVersionAvailable = false
     @State private var newVersionReleaseURL:String = ""
+    @State private var newVersionReleaseURL2:String = ""
     @State private var tweakEnable: Bool = !isSystemBootstrapped() || FileManager.default.fileExists(atPath: jbroot("/var/mobile/.tweakenabled"))
     
     let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
@@ -58,18 +59,34 @@ struct ContentView: View {
                 .padding(20)
                 
                 if newVersionAvailable {
-                    Button {
-                        UIApplication.shared.open(URL(string: newVersionReleaseURL)!)
-                    } label: {
-                        Label(
-                            title: { Text("New Version Available") },
-                            icon: { Image(systemName: "arrow.down.app.fill") }
-                        )
+                    HStack {
+                        Spacer()
+                        Menu {
+                            Button(action: {
+                                if let url = URL(string: newVersionReleaseURL) {
+                                    UIApplication.shared.open(url)
+                                }
+                            }) {
+                                Label("GitHub Download", systemImage: "arrow.down.app.fill")
+                            }
+                            Button(action: {
+                                if let url2 = URL(string: newVersionReleaseURL2) {
+                                    UIApplication.shared.open(url2)
+                                }
+                            }) {
+                                Label("Install with TrollStore", systemImage: "arrow.up.bin.fill")
+                            }
+                        } label: {
+                            Label("New Version Available", systemImage: "arrow.down.app.fill")
+                                .padding(10)
+                                .background(Color.blue)
+                                .cornerRadius(8)
+                                .foregroundColor(.white)
+                        }
+                        Spacer()
                     }
-                    .frame(height:20)
-                    .padding(.top, -20)
-                    .padding(10)
                 }
+                Spacer()
                 
                 VStack {
                     Button {
@@ -297,6 +314,7 @@ struct ContentView: View {
                 if latestTag > currentAppVersion {
                     newVersionAvailable = true
                     newVersionReleaseURL = "https://github.com/\(owner)/\(repo)/releases/tag/\(latestTag)"
+                    newVersionReleaseURL2 = "apple-magnifier://install?url=https://github.com/\(owner)/\(repo)/releases/download/\(latestTag)/Bootstrap.ipa"
                 }
             }
         }
