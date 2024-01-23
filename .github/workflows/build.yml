@@ -60,7 +60,7 @@ jobs:
       
       - name: Build Bootstrap
         run: |
-          gmake -j$(sysctl -n hw.ncpu) package
+          make package
           mv ./packages/Bootstrap.tipa Bootstrap.ipa
 
       - name: Release ipa
