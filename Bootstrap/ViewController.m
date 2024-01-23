@@ -140,22 +140,23 @@ void initFromSwiftUI()
         [NSUserDefaults.appDefaults synchronize];
         SYSLOG("locale=%@", [NSUserDefaults.appDefaults valueForKey:@"locale"]);
 
-    if(isSystemBootstrapped())
-    {
-        if(checkServer()) {
-            [AppDelegate addLogText:Localized(@"bootstrap server check successful")];
+        if(isSystemBootstrapped())
+        {
+            if(checkServer()) {
+                [AppDelegate addLogText:Localized(@"bootstrap server check successful")];
+            }
+
+            [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationWillEnterForegroundNotification object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+                checkServer();
+            }];
         }
 
-        [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationWillEnterForegroundNotification object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
-            checkServer();
-        }];
-    }
-
-    if(!IconCacheRebuilding && isBootstrapInstalled() && !isSystemBootstrapped()) {
-        if([UIApplication.sharedApplication canOpenURL:[NSURL URLWithString:@"filza://"]]
-           || [LSPlugInKitProxy pluginKitProxyForIdentifier:@"com.tigisoftware.Filza.Sharing"])
-        {
-            [AppDelegate showMesage:Localized(@"It seems that you have the Filza app installed, which may be detected as jailbroken. You can enable Tweak for it to hide it.") title:Localized(@"Warning")];
+        if(!IconCacheRebuilding && isBootstrapInstalled() && !isSystemBootstrapped()) {
+            if([UIApplication.sharedApplication canOpenURL:[NSURL URLWithString:@"filza://"]]
+               || [LSPlugInKitProxy pluginKitProxyForIdentifier:@"com.tigisoftware.Filza.Sharing"])
+            {
+                [AppDelegate showMesage:Localized(@"It seems that you have the Filza app installed, which may be detected as jailbroken. You can enable Tweak for it to hide it.") title:Localized(@"Warning")];
+            }
         }
     }
 }
