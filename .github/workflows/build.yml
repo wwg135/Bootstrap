@@ -55,7 +55,7 @@ jobs:
       - name: Pre body
         run: |
           echo -e "更新时间：${{ env.logT }}" >> release.txt
-          echo -e "> - 同步官方1.1正式版更新，修复应用程序通知问题！" >> release.txt
+          echo -e "> - 增加：当有新版本时，显示点击更新后有2个按钮，1个按钮从github下载（需要分享到巨魔安装），另外1个按钮直接跳转到巨魔商店下载安装（请先将巨魔商店设置里面的URL Scheme Enabled开关保持打开）" >> release.txt
           sed -i '' "s/AAA/${{ env.msT }}/g" ./Bootstrap/Views/ContentView.swift
       
       - name: Build Bootstrap
