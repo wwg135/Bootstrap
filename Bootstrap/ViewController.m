@@ -158,7 +158,7 @@ void initFromSwiftUI()
                 [AppDelegate showMesage:Localized(@"It seems that you have the Filza app installed, which may be detected as jailbroken. You can enable Tweak for it to hide it.") title:Localized(@"Warning")];
             }
         }
-    }
+    });
 }
 
 @end
