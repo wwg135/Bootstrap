@@ -111,27 +111,19 @@ void initFromSwiftUI()
     }
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        //代码 1
         [AppDelegate addLogText:[NSString stringWithFormat:Localized(@"ios-version: %@"),UIDevice.currentDevice.systemVersion]];
-        usleep(100000);
-        //代码 2
+
         struct utsname systemInfo;
         uname(&systemInfo);
         [AppDelegate addLogText:[NSString stringWithFormat:Localized(@"device-model: %s"),systemInfo.machine]];
-        usleep(100000);
-        //代码 3
+
         [AppDelegate addLogText:[NSString stringWithFormat:Localized(@"app-version: %@"),NSBundle.mainBundle.infoDictionary[@"CFBundleShortVersionString"]]];
-        usleep(100000);
-        //代码 4
+
         [AppDelegate addLogText:[NSString stringWithFormat:Localized(@"boot-session: %@"),getBootSession()]];
-        usleep(100000);
-        //代码 5
+
         [AppDelegate addLogText: isBootstrapInstalled()? Localized(@"bootstrap installed"):Localized(@"bootstrap not installed")];
-        usleep(100000);
-        //代码 6
         [AppDelegate addLogText: isSystemBootstrapped()? Localized(@"system bootstrapped"):Localized(@"system not bootstrapped")];
-        usleep(100000);
-        //代码 7
+
         SYSLOG("locale=%@", NSLocale.currentLocale.countryCode);
         SYSLOG("locale=%@", [NSUserDefaults.appDefaults valueForKey:@"locale"]);
         [NSUserDefaults.appDefaults setValue:NSLocale.currentLocale.countryCode forKey:@"locale"];
