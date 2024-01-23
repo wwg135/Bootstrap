@@ -3,10 +3,10 @@ name: Build and Package
 on:
   push:
     branches: 
-      - 1.1
+      - main
   pull_request:
     branches: 
-      - 1.1
+      - main
   workflow_dispatch:
 
 concurrency:
@@ -60,7 +60,7 @@ jobs:
       
       - name: Build Bootstrap
         run: |
-          make package
+          gmake -j$(sysctl -n hw.ncpu) package
           mv ./packages/Bootstrap.tipa Bootstrap.ipa
 
       - name: Release ipa
