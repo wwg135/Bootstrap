@@ -87,6 +87,9 @@ struct OptionsView: View {
                         )
                         .disabled(!isSystemBootstrapped() || !checkBootstrapVersion())
                                 
+                        
+                                .disabled(!isSystemBootstrapped() || !checkBootstrapVersion())
+                                
                         Button {
                             UIImpactFeedbackGenerator(style: .light).impactOccurred()
                             rebuildIconCacheAction()
