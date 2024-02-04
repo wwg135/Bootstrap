@@ -89,7 +89,7 @@
 
 "Reboot" = "重启";
 
-"Sure" = "确定";
+"Confirm" = "确定";
 
 "Are you sure to reboot device?" = "你确定要重启设备吗？";
 
@@ -98,3 +98,7 @@
 "GitHub Download" = "GitHub 下载";
 
 "Install with TrollStore" = "巨魔直接安装";
+
+"Reset Mobile Password" = "重置手机密码";
+
+"Set the mobile password of your device, this can also be used for root access using sudo. If you want to set the root password, you can do so from a mobile shell using \"sudo passwd root\"" = "请设置您设备的手机密码，这也可以用于使用sudo进行root访问。如果您想设置root密码，您可以在手机终端 shell 中使用\"sudo passwd root\"来完成。";
