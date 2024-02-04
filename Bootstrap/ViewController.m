@@ -110,43 +110,51 @@ void initFromSwiftUI()
         }
     }
 
-    [AppDelegate addLogText:[NSString stringWithFormat:Localized(@"ios-version: %@"),UIDevice.currentDevice.systemVersion]];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        [AppDelegate addLogText:[NSString stringWithFormat:Localized(@"ios-version: %@"),UIDevice.currentDevice.systemVersion]];
+        usleep(100000);
 
-    struct utsname systemInfo;
-    uname(&systemInfo);
-    [AppDelegate addLogText:[NSString stringWithFormat:Localized(@"device-model: %s"),systemInfo.machine]];
+        struct utsname systemInfo;
+        uname(&systemInfo);
+        [AppDelegate addLogText:[NSString stringWithFormat:Localized(@"device-model: %s"),systemInfo.machine]];
+        usleep(100000);
 
-    [AppDelegate addLogText:[NSString stringWithFormat:Localized(@"app-version: %@"),NSBundle.mainBundle.infoDictionary[@"CFBundleShortVersionString"]]];
+        [AppDelegate addLogText:[NSString stringWithFormat:Localized(@"app-version: %@"),NSBundle.mainBundle.infoDictionary[@"CFBundleShortVersionString"]]];
+        usleep(100000);
+        
+        [AppDelegate addLogText:[NSString stringWithFormat:Localized(@"boot-session: %@"),getBootSession()]];
+        usleep(100000);
+        
+        [AppDelegate addLogText: isBootstrapInstalled()? Localized(@"bootstrap installed"):Localized(@"bootstrap not installed")];
+        usleep(100000);
+        [AppDelegate addLogText: isSystemBootstrapped()? Localized(@"system bootstrapped"):Localized(@"system not bootstrapped")];
+        usleep(100000);
+        
+        SYSLOG("locale=%@", NSLocale.currentLocale.countryCode);
+        SYSLOG("locale=%@", [NSUserDefaults.appDefaults valueForKey:@"locale"]);
+        [NSUserDefaults.appDefaults setValue:NSLocale.currentLocale.countryCode forKey:@"locale"];
+        [NSUserDefaults.appDefaults synchronize];
+        SYSLOG("locale=%@", [NSUserDefaults.appDefaults valueForKey:@"locale"]);
 
-    [AppDelegate addLogText:[NSString stringWithFormat:Localized(@"boot-session: %@"),getBootSession()]];
-
-    [AppDelegate addLogText: isBootstrapInstalled()? Localized(@"bootstrap installed"):Localized(@"bootstrap not installed")];
-    [AppDelegate addLogText: isSystemBootstrapped()? Localized(@"system bootstrapped"):Localized(@"system not bootstrapped")];
-
-    SYSLOG("locale=%@", NSLocale.currentLocale.countryCode);
-    SYSLOG("locale=%@", [NSUserDefaults.appDefaults valueForKey:@"locale"]);
-    [NSUserDefaults.appDefaults setValue:NSLocale.currentLocale.countryCode forKey:@"locale"];
-    [NSUserDefaults.appDefaults synchronize];
-    SYSLOG("locale=%@", [NSUserDefaults.appDefaults valueForKey:@"locale"]);
-
-    if(isSystemBootstrapped())
-    {
-        if(checkServer()) {
-            [AppDelegate addLogText:Localized(@"bootstrap server check successful")];
-        }
-
-        [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationWillEnterForegroundNotification object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
-            checkServer();
-        }];
-    }
-
-    if(!IconCacheRebuilding && isBootstrapInstalled() && !isSystemBootstrapped()) {
-        if([UIApplication.sharedApplication canOpenURL:[NSURL URLWithString:@"filza://"]]
-           || [LSPlugInKitProxy pluginKitProxyForIdentifier:@"com.tigisoftware.Filza.Sharing"])
+        if(isSystemBootstrapped())
         {
-            [AppDelegate showMesage:Localized(@"It seems that you have the Filza app installed, which may be detected as jailbroken. You can enable Tweak for it to hide it.") title:Localized(@"Warning")];
+            if(checkServer()) {
+                [AppDelegate addLogText:Localized(@"bootstrap server check successful")];
+            }
+
+            [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationWillEnterForegroundNotification object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+                checkServer();
+            }];
         }
-    }
+
+        if(!IconCacheRebuilding && isBootstrapInstalled() && !isSystemBootstrapped()) {
+            if([UIApplication.sharedApplication canOpenURL:[NSURL URLWithString:@"filza://"]]
+               || [LSPlugInKitProxy pluginKitProxyForIdentifier:@"com.tigisoftware.Filza.Sharing"])
+            {
+                [AppDelegate showMesage:Localized(@"It seems that you have the Filza app installed, which may be detected as jailbroken. You can enable Tweak for it to hide it.") title:Localized(@"Warning")];
+            }
+        }
+    });
 }
 
 @end
@@ -176,6 +184,24 @@ void respringAction()
     NSString* err=nil;
     int status = spawnBootstrap((char*[]){"/usr/bin/sbreload", NULL}, &log, &err);
     if(status!=0) [AppDelegate showMesage:[NSString stringWithFormat:@"%@\n\nstderr:\n%@",log,err] title:[NSString stringWithFormat:@"code(%d)",status]];
+}
+
+void rebootAction() 
+{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:Localized(@"Warning") message:Localized(@"Are you sure to reboot device?") preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:Localized(@"Cancel") style:UIAlertActionStyleDefault handler:nil]];
+    [alert addAction:[UIAlertAction actionWithTitle:Localized(@"Confirm") style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action){
+        
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            NSString *log = nil;
+            NSString *err = nil;
+            int status = spawnRoot(NSBundle.mainBundle.executablePath, @[@"reboot"], &log, &err);
+            if (status != 0) {
+                [AppDelegate showMesage:[NSString stringWithFormat:@"%@\n\nstderr:\n%@", log, err] title:[NSString stringWithFormat:@"code(%d)", status]];
+            }
+        });
+    }]];
+    [[[UIApplication sharedApplication] keyWindow].rootViewController presentViewController:alert animated:YES completion:nil];
 }
 
 void rebuildappsAction()
@@ -219,20 +245,8 @@ void reinstallPackageManager()
             success = NO;
         }
 
-        [AppDelegate addLogText:Localized(@"Status: Reinstalling Zebra")];
-        NSString* zebraDeb = [NSBundle.mainBundle.bundlePath stringByAppendingPathComponent:@"zebra.deb"];
-        if(spawnBootstrap((char*[]){"/usr/bin/dpkg", "-i", rootfsPrefix(zebraDeb).fileSystemRepresentation, NULL}, nil, nil) != 0) {
-            [AppDelegate addLogText:[NSString stringWithFormat:@"failed:%@\nERR:%@", log, err]];
-            success = NO;
-        }
-
-        if(spawnBootstrap((char*[]){"/usr/bin/uicache", "-p", "/Applications/Zebra.app", NULL}, &log, &err) != 0) {
-            [AppDelegate addLogText:[NSString stringWithFormat:@"failed:%@\nERR:%@", log, err]];
-            success = NO;
-        }
-
         if(success) {
-            [AppDelegate showMesage:Localized(@"Sileo and Zebra reinstalled!") title:@""];
+            [AppDelegate showMesage:Localized(@"Sileo reinstalled!") title:@""];
         }
         [AppDelegate dismissHud];
     });

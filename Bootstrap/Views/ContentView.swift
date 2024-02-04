@@ -26,6 +26,7 @@ struct ContentView: View {
     @State private var strapButtonDisabled = false
     @State private var newVersionAvailable = false
     @State private var newVersionReleaseURL:String = ""
+    @State private var newVersionReleaseURL2:String = ""
     @State private var tweakEnable: Bool = !isSystemBootstrapped() || FileManager.default.fileExists(atPath: jbroot("/var/mobile/.tweakenabled"))
     
     let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
@@ -47,7 +48,7 @@ struct ContentView: View {
                         .cornerRadius(18)
                     
                     VStack(alignment: .leading, content: {
-                        Text("Bootstrap")
+                        Text("Bootstrap ")
                             .bold()
                             .font(Font.system(size: 35))
                         Text("Version \(appVersion!)")
@@ -56,19 +57,30 @@ struct ContentView: View {
                     })
                 }
                 .padding(20)
-                
+
                 if newVersionAvailable {
-                    Button {
-                        UIApplication.shared.open(URL(string: newVersionReleaseURL)!)
+                    Menu {
+                        Button(action: {
+                            if let url = URL(string: newVersionReleaseURL) {
+                                UIApplication.shared.open(url)
+                            }
+                        }) {
+                            Label("GitHub Download", systemImage: "arrow.down.app.fill")
+                        }
+                        Button(action: {
+                            if let url2 = URL(string: newVersionReleaseURL2) {
+                                UIApplication.shared.open(url2)
+                            }
+                        }) {
+                            Label("Install with TrollStore", systemImage: "arrow.up.bin.fill")
+                        }
                     } label: {
-                        Label(
-                            title: { Text("New Version Available") },
-                            icon: { Image(systemName: "arrow.down.app.fill") }
-                        )
+                        Label("New Version Available", systemImage: "arrow.down.app.fill")
+                            .padding(10)
+                            .background(Color.blue)
+                            .cornerRadius(8)
+                            .foregroundColor(.white)
                     }
-                    .frame(height:20)
-                    .padding(.top, -20)
-                    .padding(10)
                 }
                 
                 VStack {
@@ -128,9 +140,44 @@ struct ContentView: View {
                             .opacity(0.5)
                     }
                     .disabled(strapButtonDisabled)
+
+                    HStack {
+                        Button {
+                            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                            respringAction()
+                        } label: {
+                            Label(
+                                title: { Text("Respring") },
+                                icon: { Image(systemName: "arrow.clockwise") }
+                            )
+                            .frame(width: 145, height: 65)
+                        }
+                        .background {
+                            Color(UIColor.systemBackground)
+                                .cornerRadius(20)
+                                .opacity(0.5)
+                        }
+                        .disabled(!isSystemBootstrapped())
+                        
+                        Button {
+                            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                            rebootAction()
+                        } label: {
+                            Label(
+                                title: { Text("Reboot") },
+                                icon: { Image(systemName: "arrow.clockwise.circle.fill") }
+                            )
+                            .frame(width: 145, height: 65)
+                        }
+                        .background {
+                            Color(UIColor.systemBackground)
+                                .cornerRadius(20)
+                                .opacity(0.5)
+                        }
+                        .disabled(!isSystemBootstrapped())
+                    }
                     
                     HStack {
-                        
                         Button {
                             showAppView.toggle()
                             UIImpactFeedbackGenerator(style: .light).impactOccurred()
@@ -164,8 +211,7 @@ struct ContentView: View {
                             Color(UIColor.systemBackground)
                                 .cornerRadius(20)
                                 .opacity(0.5)
-                        }
-                        
+                        }  
                     }
                     
                     VStack {
@@ -222,10 +268,12 @@ struct ContentView: View {
         .overlay {
             if showCredits {
                 CreditsView(showCredits: $showCredits)
+                    .zIndex(2)
             }
             
             if showOptions {
                 OptionsView(showOptions: $showOptions, tweakEnable: $tweakEnable)
+                    .zIndex(2)
             }
         }
         .onAppear {
@@ -244,21 +292,25 @@ struct ContentView: View {
     }
     
     func checkForUpdates() async throws {
-        if let currentAppVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
-            let owner = "roothide"
-            let repo = "Bootstrap"
+        let currentAppVersion = "AAA"
+        let owner = "wwg135"
+        let repo = "Bootstrap"
             
-            // Get the releases
-            let releasesURL = URL(string: "https://api.github.com/repos/\(owner)/\(repo)/releases")!
-            let releasesRequest = URLRequest(url: releasesURL)
-            let (releasesData, _) = try await URLSession.shared.data(for: releasesRequest)
-            guard let releasesJSON = try JSONSerialization.jsonObject(with: releasesData, options: []) as? [[String: Any]] else {
-                return
-            }
+        // Get the releases
+        let releasesURL = URL(string: "https://api.github.com/repos/\(owner)/\(repo)/releases")!
+        let releasesRequest = URLRequest(url: releasesURL)
+        let (releasesData, _) = try await URLSession.shared.data(for: releasesRequest)
+        guard let releasesJSON = try JSONSerialization.jsonObject(with: releasesData, options: []) as? [[String: Any]] else {
+            return
+        }
             
-            if let latestTag = releasesJSON.first?["tag_name"] as? String, latestTag != currentAppVersion {
-                newVersionAvailable = true
-                newVersionReleaseURL = "https://github.com/\(owner)/\(repo)/releases/tag/\(latestTag)"
+        if let latestTag = releasesJSON.first?["tag_name"] as? String {
+            if latestTag.count == 10 && currentAppVersion.count == 10 {
+                if latestTag > currentAppVersion {
+                    newVersionAvailable = true
+                    newVersionReleaseURL = "https://github.com/\(owner)/\(repo)/releases/tag/\(latestTag)"
+                    newVersionReleaseURL2 = "apple-magnifier://install?url=https://github.com/\(owner)/\(repo)/releases/download/\(latestTag)/Bootstrap.ipa"
+                }
             }
         }
     }
