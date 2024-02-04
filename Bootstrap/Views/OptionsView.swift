@@ -87,9 +87,6 @@ struct OptionsView: View {
                         )
                         .disabled(!isSystemBootstrapped() || !checkBootstrapVersion())
                                 
-                        
-                                .disabled(!isSystemBootstrapped() || !checkBootstrapVersion())
-                                
                         Button {
                             UIImpactFeedbackGenerator(style: .light).impactOccurred()
                             rebuildIconCacheAction()
@@ -97,6 +94,27 @@ struct OptionsView: View {
                             Label(
                                 title: { Text("Rebuild Icon Cache") },
                                 icon: { Image(systemName: "arrow.clockwise") }
+                            )
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 10)
+                            .foregroundColor((!isSystemBootstrapped() || !checkBootstrapVersion()) ? Color.accentColor : Color.init(uiColor: UIColor.label))
+                        }
+                        .frame(width: 250)
+                        .background(Color.clear)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(.gray, lineWidth: 1)
+                                .opacity(0.3)
+                        )
+                        .disabled(!isSystemBootstrapped() || !checkBootstrapVersion())
+
+                        Button {
+                            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                            resetMobilePassword()
+                        } label: {
+                            Label(
+                                title: { Text("Reset Mobile Password") },
+                                icon: { Image(systemName: "key") }
                             )
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 10)
