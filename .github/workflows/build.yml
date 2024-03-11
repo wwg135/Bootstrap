@@ -3,10 +3,10 @@ name: Build and Package
 on:
   push:
     branches: 
-      - main
+      - 1.2.2
   pull_request:
     branches: 
-      - main
+      - 1.2.2
   workflow_dispatch:
 
 concurrency:
@@ -17,7 +17,7 @@ permissions:
   contents: write
 
 env:
-  VERSION: '1.2.1'
+  VERSION: '1.2.2'
 
 jobs:
   build:
@@ -31,12 +31,8 @@ jobs:
         with:
           submodules: true
 
-      - name: Pre theos
-        run: |
-         curl -fsSL https://raw.githubusercontent.com/roothide/theos/master/bin/install-theos > theos
-         sed -i '' 's/get_sdks$//g' theos
-         bash theos
-         brew install make
+      - name: Install Theos
+        run: bash -c "$(curl -fsSL https://raw.githubusercontent.com/roothide/theos/master/bin/install-theos)"
 
       - name: Set env
         run: |
@@ -54,7 +50,7 @@ jobs:
       - name: Pre body
         run: |
           echo -e "更新时间：${{ env.logT }}" >> release.txt
-          echo -e "> - 同步官方1.2.1正式版更新，修复异常发热问题。M哥的编译版本特别说明：1.首页只增加了重启按钮。2.设置里面改为点击空白关闭。3.点击更新可以直接在巨魔安装。其他全部是原生官方代码！！" >> release.txt
+          echo -e "> - 同步官方最新代码更新。M哥的编译版本特别说明：1.首页只增加了重启按钮。2.设置里面改为点击空白关闭。3.点击更新可以直接在巨魔安装。其他全部是原生官方代码！！" >> release.txt
           sed -i '' "s/AAA/${{ env.msT }}/g" ./Bootstrap/Views/ContentView.swift
       
       - name: Build Bootstrap
