@@ -10,15 +10,25 @@ import FluidGradient
 
 @objc class SwiftUIViewWrapper: NSObject {
     @objc static func createSwiftUIView() -> UIViewController {
-        let viewController = UIHostingController(rootView: ContentView())
+        let viewController = UIHostingController(rootView: MainView())
         return viewController
     }
 }
 
-struct ContentView: View {
+public let niceAnimation = Animation.timingCurve(0.25, 0.1, 0.35, 1.3).speed(0.9)
+
+struct MainView: View {
     @State var LogItems: [String.SubSequence] = {
         return [""]
     }()
+    
+//    let colorsWarm: [Color] = [.red, .orange, .yellow]
+//    let colorsCold: [Color] = [.blue, .purple, .pink]
+    
+    @State var currentBlobs: [Color] = []
+    @State var currentHighlights: [Color] = []
+    
+    @AppStorage("colorScheme") var colorScheme = 0
     
     @State private var showOptions = false
     @State private var showCredits = false
@@ -33,12 +43,22 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-            FluidGradient(blobs: [.red, .orange],
-                          highlights: [.red, .yellow],
+            FluidGradient(blobs: currentBlobs,
+                          highlights: currentHighlights,
                           speed: 0.5,
                           blur: 0.95)
             .background(.quaternary)
             .ignoresSafeArea()
+            .onAppear {
+                currentBlobs = colorScheme == 0 ? [.red, .orange] : [.blue, .purple]
+                currentHighlights = colorScheme == 0 ? [.red, .yellow] : [.blue, .pink]
+            }
+            .onChange(of: colorScheme) {_ in
+                withAnimation(.easeInOut(duration: 2.5).speed(0.5)) {
+                    currentBlobs = colorScheme == 0 ? [.red, .orange] : [.blue, .purple]
+                    currentHighlights = colorScheme == 0 ? [.red, .yellow] : [.blue, .pink]
+                }
+            }
             
             VStack {
                 HStack(spacing: 15) {
@@ -85,7 +105,7 @@ struct ContentView: View {
                 
                 VStack {
                     Button {
-                        UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                        Haptic.shared.play(.light)
                         bootstrapAction()
                     } label: {
                         if isSystemBootstrapped() {
@@ -136,7 +156,7 @@ struct ContentView: View {
                     .frame(width: 295)
                     .background {
                         Color(UIColor.systemBackground)
-                            .cornerRadius(20)
+                            .cornerRadius(18)
                             .opacity(0.5)
                     }
                     .disabled(strapButtonDisabled)
@@ -180,7 +200,7 @@ struct ContentView: View {
                     HStack {
                         Button {
                             showAppView.toggle()
-                            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                            Haptic.shared.play(.light)
                         } label: {
                             Label(
                                 title: { Text("App List") },
@@ -190,15 +210,15 @@ struct ContentView: View {
                         }
                         .background {
                             Color(UIColor.systemBackground)
-                                .cornerRadius(20)
+                                .cornerRadius(18)
                                 .opacity(0.5)
                         }
                         .disabled(!isSystemBootstrapped() || !checkBootstrapVersion())
                         
                         Button {
-                            withAnimation {
-                                UIImpactFeedbackGenerator(style: .light).impactOccurred()
-                                showOptions.toggle()
+                            withAnimation(niceAnimation) {
+                                Haptic.shared.play(.light)
+                                showOptions = true
                             }
                         } label: {
                             Label(
@@ -209,7 +229,7 @@ struct ContentView: View {
                         }
                         .background {
                             Color(UIColor.systemBackground)
-                                .cornerRadius(20)
+                                .cornerRadius(18)
                                 .opacity(0.5)
                         }  
                     }
@@ -239,7 +259,7 @@ struct ContentView: View {
                     .padding(20)
                     .background {
                         Color(.black)
-                            .cornerRadius(20)
+                            .cornerRadius(18)
                             .opacity(0.5)
                     }
                     
@@ -248,11 +268,13 @@ struct ContentView: View {
                         .opacity(0.5)
                 }
             }
+            .scaleEffect((showOptions || showCredits) ? 0.9 : 1)
         }
+        .tint(colorScheme == 0 ? .orange : .blue)
         .safeAreaInset(edge: .bottom, spacing: 0) {
             Button {
-                withAnimation {
-                    UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                withAnimation(niceAnimation) {
+                    Haptic.shared.play(.light)
                     showCredits.toggle()
                 }
             } label: {
@@ -263,18 +285,20 @@ struct ContentView: View {
             }
             .frame(height:30, alignment: .bottom)
             .padding(10)
-            
+            .animation(.default, value: colorScheme)
+            .tint(colorScheme == 0 ? .orange : .blue)
         }
         .overlay {
-            if showCredits {
+            Group {
                 CreditsView(showCredits: $showCredits)
-                    .zIndex(2)
+                    .opacity(showCredits ? 1 : 0)
+                    .allowsHitTesting(showCredits)
+                OptionsView(showOptions: $showOptions, tweakEnable: $tweakEnable, colorScheme: $colorScheme)
+                    .opacity(showOptions ? 1 : 0)
+                    .allowsHitTesting(showOptions)
             }
-            
-            if showOptions {
-                OptionsView(showOptions: $showOptions, tweakEnable: $tweakEnable)
-                    .zIndex(2)
-            }
+            .animation(.default, value: colorScheme)
+            .tint(colorScheme == 0 ? .orange : .blue)
         }
         .onAppear {
             initFromSwiftUI()
@@ -313,5 +337,11 @@ struct ContentView: View {
                 }
             }
         }
+    }
+}
+
+struct MainView_Preview: PreviewProvider {
+    static var previews: some View {
+        MainView()
     }
 }
