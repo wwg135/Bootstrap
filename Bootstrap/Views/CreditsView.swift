@@ -16,12 +16,15 @@ struct CreditsView: View {
         ZStack {
             VisualEffectView(effect: UIBlurEffect(style: .regular))
                 .ignoresSafeArea()
+                .onTapGesture {
+                   showCredits = false
+                }
             
             VStack {
-                HStack {
+                VStack {
                     Text("Credits")
                         .bold()
-                        .frame(maxWidth: 250, alignment: .leading)
+                        .frame(maxWidth: 250, alignment: .center )
                         .font(Font.system(size: 35))
                     Button {
                         Haptic.shared.play(.light)
@@ -40,8 +43,7 @@ struct CreditsView: View {
                 }
                 
                 ScrollView {
-                    VStack {
-                        
+                    VStack { 
                         VStack {
                             ForEach(credits.sorted(by: { $0.key < $1.key }), id: \.key) { (name, link) in
                                 creditStack(name: name, link: link)

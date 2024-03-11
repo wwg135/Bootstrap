@@ -25,12 +25,15 @@ struct OptionsView: View {
         ZStack {
             VisualEffectView(effect: UIBlurEffect(style: .regular))
                 .ignoresSafeArea()
-            
+                .onTapGesture {
+                    showOptions = false
+                }
+      
             VStack {
-                HStack {
+                VStack {
                     Text("Settings")
                         .bold()
-                        .frame(maxWidth: 250, alignment: .leading)
+                        .frame(maxWidth: 250, alignment: .center)
                         .font(Font.system(size: 35))
                     
                     Button {
@@ -94,29 +97,7 @@ struct OptionsView: View {
                             
                             Divider().padding(10)
                             
-                            VStack(alignment: .leading, spacing: 12, content: {
-                                
-                                Button {
-                                    Haptic.shared.play(.light)
-                                    respringAction()
-                                } label: {
-                                    Label(
-                                        title: { Text("Respring") },
-                                        icon: { Image(systemName: "arrow.clockwise") }
-                                    )
-                                    .frame(maxWidth: .infinity)
-                                    .padding(.vertical, 10)
-                                    .foregroundColor((!isSystemBootstrapped() || !checkBootstrapVersion()) ? Color.accentColor : Color.init(uiColor: UIColor.label))
-                                }
-                                .frame(width: 250)
-                                .background(Color.clear)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .stroke(.gray, lineWidth: 1)
-                                        .opacity(0.3)
-                                )
-                                .disabled(!isSystemBootstrapped() || !checkBootstrapVersion())
-                                
+                            VStack(alignment: .leading, spacing: 12, content: {                  
                                 Button {
                                     Haptic.shared.play(.light)
                                     rebuildappsAction()
@@ -185,7 +166,7 @@ struct OptionsView: View {
                                     reinstallPackageManager()
                                 } label: {
                                     Label(
-                                        title: { Text("Reinstall Sileo & Zebra") },
+                                        title: { Text("Reinstall Sileo") },
                                         icon: { Image(systemName: "shippingbox") }
                                     )
                                     .frame(maxWidth: .infinity)
@@ -225,20 +206,49 @@ struct OptionsView: View {
                                 }
                             })
                         }
-                        .frame(width: 253)
-                        .padding(20)
-                        .background {
-                            Color(UIColor.systemBackground)
-                                .cornerRadius(20)
-                                .opacity(0.5)
+                        .frame(width: 250)
+                        .background(Color.clear)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(.gray, lineWidth: 1)
+                                .opacity(0.3)
+                        )
+                        .disabled(!isSystemBootstrapped() || !checkBootstrapVersion())
+                                             
+                        if isBootstrapInstalled() {
+                            Button {
+                                UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                                unbootstrapAction()
+                            } label: {
+                                Label(
+                                    title: { Text("Uninstall") },
+                                    icon: { Image(systemName: "trash") }
+                                )
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 10)
+                                .foregroundColor(isSystemBootstrapped() ? Color.accentColor : Color.init(uiColor: UIColor.label))
+                            }
+                            .frame(width: 250)
+                            .background(Color.clear)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(.gray, lineWidth: 1)
+                                    .opacity(0.3)
+                            )
+                            .disabled(isSystemBootstrapped())
                         }
-                    }
-                //}
+                    })
+                }
+                .frame(width: 253)
+                .padding(20)
+                .background {
+                    Color(UIColor.systemBackground)
+                        .cornerRadius(20)
+                        .opacity(0.5)
+                }
             }
             .frame(maxHeight: 550)
             .scaleEffect(showOptions ? 1 : 0.9)
         }
     }
 }
-
-
